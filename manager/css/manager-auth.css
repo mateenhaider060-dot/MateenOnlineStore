@@ -1,0 +1,187 @@
+/* ═══════════════════════════════════════════
+   MATEEN ONLINE STORE — MANAGER AUTH STYLES
+   ═══════════════════════════════════════════ */
+
+.manager-login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #064e3b 0%, #065f46 50%, #047857 100%);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.manager-login-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(16, 185, 129, 0.2), transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(52, 211, 153, 0.15), transparent 50%);
+  pointer-events: none;
+}
+
+.manager-login-card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 40px 32px;
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  animation: cardFadeIn 0.5s ease-out;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.manager-login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.manager-logo {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px -8px rgba(16, 185, 129, 0.6);
+}
+
+.manager-login-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.manager-login-header p {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.manager-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.manager-login-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.manager-login-form label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.manager-login-form input {
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background: #f8fafc;
+}
+
+.manager-login-form input:focus {
+  outline: none;
+  border-color: #10b981;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+.manager-login-form .btn-primary {
+  margin-top: 8px;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.manager-login-form .btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -8px rgba(16, 185, 129, 0.6);
+}
+
+.manager-login-form .btn-primary:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.manager-login-form .error-message {
+  color: #dc2626;
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 10px;
+  background: #fef2f2;
+  border-radius: 8px;
+  border: 1px solid #fecaca;
+}
+
+.manager-login-footer {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+.manager-login-footer p {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.btn-loader {
+  display: inline-block;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 480px) {
+  .manager-login-card {
+    padding: 28px 20px;
+    border-radius: 16px;
+  }
+  .manager-logo {
+    width: 60px;
+    height: 60px;
+    font-size: 28px;
+  }
+  .manager-login-header h1 {
+    font-size: 1.4rem;
+  }
+}

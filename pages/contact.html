@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Mateen Online Store</title>
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/info-pages.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="container header-container">
+        <a href="home.html" class="logo">
+            <span class="logo-icon">🛒</span>
+            <span class="logo-text">Mateen Store</span>
+        </a>
+        <nav class="nav">
+            <a href="home.html" data-i18n="nav_home">Home</a>
+            <a href="products.html" data-i18n="nav_products">Products</a>
+            <a href="about.html" data-i18n="nav_about">About</a>
+            <a href="contact.html" class="active" data-i18n="nav_contact">Contact</a>
+            <a href="cart.html" class="cart-link">
+                🛒 <span id="cartCount">0</span>
+            </a>
+            <button id="langToggle" class="lang-btn">اردو</button>
+            <button id="logoutBtn" class="logout-btn" data-i18n="nav_logout">Logout</button>
+        </nav>
+    </div>
+</header>
+
+<main class="info-page">
+    <div class="container">
+
+        <div class="info-hero">
+            <h1 data-i18n="contact_title">Contact Us</h1>
+            <p data-i18n="contact_subtitle">We'd love to hear from you</p>
+        </div>
+
+        <div class="contact-wrapper">
+
+            <div class="contact-info">
+                <h2 data-i18n="contact_reach">Reach Us</h2>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div>
+                        <h4 data-i18n="contact_address">Address</h4>
+                        <p data-i18n="contact_address_text">123 Main Street, Lahore, Pakistan</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <h4 data-i18n="contact_phone">Phone</h4>
+                        <p>+92 300 1234567</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <h4 data-i18n="contact_email">Email</h4>
+                        <p>support@mateenstore.com</p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">🕒</div>
+                    <div>
+                        <h4 data-i18n="contact_hours">Working Hours</h4>
+                        <p data-i18n="contact_hours_text">Mon - Sat: 9:00 AM - 9:00 PM</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper">
+                <h2 data-i18n="contact_send">Send a Message</h2>
+
+                <form id="contactForm" class="contact-form">
+                    <div class="form-group">
+                        <label for="name" data-i18n="form_name">Full Name</label>
+                        <input type="text" id="name" name="name" required 
+                               placeholder="Enter your name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" data-i18n="form_email">Email</label>
+                        <input type="email" id="email" name="email" required 
+                               placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject" data-i18n="form_subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required 
+                               placeholder="Enter subject">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" data-i18n="form_message">Message</label>
+                        <textarea id="message" name="message" rows="5" required 
+                                  placeholder="Type your message here..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary" data-i18n="form_send">
+                        Send Message
+                    </button>
+
+                    <p id="formStatus" class="form-status"></p>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+<footer class="footer">
+    <div class="container footer-container">
+        <div class="footer-col">
+            <h4>Mateen Store</h4>
+            <p data-i18n="footer_about">Your trusted online shopping destination.</p>
+        </div>
+        <div class="footer-col">
+            <h4 data-i18n="footer_quick">Quick Links</h4>
+            <a href="about.html" data-i18n="nav_about">About</a>
+            <a href="contact.html" data-i18n="nav_contact">Contact</a>
+            <a href="faq.html" data-i18n="nav_faq">FAQ</a>
+        </div>
+        <div class="footer-col">
+            <h4 data-i18n="footer_legal">Legal</h4>
+            <a href="terms.html" data-i18n="nav_terms">Terms</a>
+            <a href="privacy.html" data-i18n="nav_privacy">Privacy</a>
+            <a href="return-policy.html" data-i18n="nav_return">Return Policy</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 Mateen Online Store. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="../js/firebase-config.js"></script>
+<script src="../js/i18n.js"></script>
+<script src="../js/global.js"></script>
+<script src="../js/auth-guard.js"></script>
+<script src="../js/info-pages.js"></script>
+</body>
+</html>

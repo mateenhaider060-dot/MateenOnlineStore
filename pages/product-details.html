@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Details</title>
+
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/product-details.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <header class="main-header">
+    <div class="container header-inner">
+      <a href="home.html" class="logo">
+        <i class="fa-solid fa-store"></i>
+        <span data-i18n="brand">Mateen Online Store</span>
+      </a>
+
+      <div class="search-bar">
+        <input type="text" id="searchInput"
+               data-i18n-placeholder="search_placeholder"
+               placeholder="Search products..." />
+        <button id="searchBtn" aria-label="Search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
+
+      <div class="header-actions">
+        <button class="icon-btn lang-btn" id="langToggle" title="Language">
+          <span id="langLabel">اردو</span>
+        </button>
+        <a href="profile.html" class="icon-btn" title="Profile">
+          <i class="fa-regular fa-user"></i>
+        </a>
+        <a href="cart.html" class="icon-btn cart-btn" title="Cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+        <button class="icon-btn" id="logoutBtn" title="Logout">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href="home.html" data-i18n="home">Home</a>
+      <i class="fa-solid fa-chevron-right"></i>
+      <a href="products.html" data-i18n="products">Products</a>
+      <i class="fa-solid fa-chevron-right"></i>
+      <span id="breadcrumbProduct">...</span>
+    </nav>
+  </div>
+
+  <section class="product-details-section">
+    <div class="container">
+
+      <div class="loading-text" id="detailsLoading" data-i18n="loading">Loading...</div>
+
+      <div class="product-details-layout hidden" id="productDetailsLayout">
+
+        <div class="product-gallery">
+          <div class="main-image-wrap">
+            <img id="mainImage" src="" alt="Product Image" />
+          </div>
+          <div class="thumbnail-row" id="thumbnailRow"></div>
+        </div>
+
+        <div class="product-info-panel">
+
+          <h1 class="product-detail-title" id="detailTitle">—</h1>
+
+          <div class="product-rating-row">
+            <div class="stars" id="detailStars">★★★★★</div>
+            <span class="review-count" id="detailReviews">(0 reviews)</span>
+            <span class="stock-badge in-stock" id="detailStock">In Stock</span>
+          </div>
+
+          <div class="product-price-row">
+            <span class="current-price" id="detailPrice">Rs 0</span>
+            <del class="old-price hidden" id="detailOldPrice">Rs 0</del>
+            <span class="discount-badge hidden" id="detailDiscount">-0%</span>
+          </div>
+
+          <p class="product-short-desc" id="detailDesc">—</p>
+
+          <div class="quantity-row">
+            <label data-i18n="quantity">Quantity</label>
+            <div class="qty-control">
+              <button id="qtyMinus"><i class="fa-solid fa-minus"></i></button>
+              <input type="number" id="qtyInput" value="1" min="1" />
+              <button id="qtyPlus"><i class="fa-solid fa-plus"></i></button>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn btn-outline btn-lg" id="addToCartBtn">
+              <i class="fa-solid fa-cart-plus"></i>
+              <span data-i18n="add_to_cart">Add to Cart</span>
+            </button>
+            <button class="btn btn-primary btn-lg" id="buyNowBtn">
+              <i class="fa-solid fa-bolt"></i>
+              <span data-i18n="buy_now">Buy Now</span>
+            </button>
+          </div>
+
+          <div class="extra-info">
+            <div class="info-item">
+              <i class="fa-solid fa-truck-fast"></i>
+              <span data-i18n="feature_fast_delivery">Fast Delivery</span>
+            </div>
+            <div class="info-item">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span data-i18n="feature_original">Original Products</span>
+            </div>
+            <div class="info-item">
+              <i class="fa-solid fa-rotate-left"></i>
+              <span data-i18n="feature_easy_return">Easy Returns</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="tabs-section hidden" id="tabsSection">
+    <div class="container">
+      <div class="tabs-header">
+        <button class="tab-btn active" data-tab="description" data-i18n="description">Description</button>
+        <button class="tab-btn" data-tab="specifications" data-i18n="specifications">Specifications</button>
+        <button class="tab-btn" data-tab="reviews" data-i18n="reviews">Reviews</button>
+      </div>
+
+      <div class="tabs-body">
+        <div class="tab-content active" id="tab-description">
+          <p id="tabDescriptionText">—</p>
+        </div>
+        <div class="tab-content" id="tab-specifications">
+          <ul id="tabSpecsList" class="specs-list"></ul>
+        </div>
+        <div class="tab-content" id="tab-reviews">
+          <p class="text-muted" data-i18n="no_reviews_yet">No reviews yet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="related-section hidden" id="relatedSection">
+    <div class="container">
+      <h2 class="section-title" data-i18n="related_products">Related Products</h2>
+      <div class="products-grid" id="relatedGrid"></div>
+    </div>
+  </section>
+
+  <footer class="main-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h4 data-i18n="brand">Mateen Online Store</h4>
+        <p data-i18n="footer_desc">Best products at best prices — delivery all over Pakistan.</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="links">Links</h4>
+        <ul>
+          <li><a href="about.html" data-i18n="about_us">About Us</a></li>
+          <li><a href="contact.html" data-i18n="contact">Contact</a></li>
+          <li><a href="faq.html" data-i18n="faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="policies">Policies</h4>
+        <ul>
+          <li><a href="terms.html" data-i18n="terms">Terms & Conditions</a></li>
+          <li><a href="privacy.html" data-i18n="privacy">Privacy Policy</a></li>
+          <li><a href="return-policy.html" data-i18n="return_policy">Return Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="follow_us">Follow Us</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="copyright">© 2026 Mateen Online Store. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/firebase-config.js"></script>
+  <script type="module" src="../js/global.js"></script>
+  <script type="module" src="../js/i18n.js"></script>
+  <script type="module" src="../js/auth-guard.js"></script>
+  <script type="module" src="../js/product-details.js"></script>
+</body>
+</html>

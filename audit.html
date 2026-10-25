@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="ur" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mateen Online Store — Project Structure Audit</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0f172a;
+    --bg-2: #1e293b;
+    --bg-3: #334155;
+    --border: #334155;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --green: #22c55e;
+    --red: #ef4444;
+    --yellow: #eab308;
+    --blue: #3b82f6;
+    --purple: #a855f7;
+    --orange: #f97316;
+    --pink: #ec4899;
+  }
+
+  body {
+    font-family: 'Segoe UI', Tahoma, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .container { max-width: 1400px; margin: 0 auto; }
+
+  /* ---------- Header ---------- */
+  header {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -50%; right: -10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(59,130,246,0.15), transparent 70%);
+    pointer-events: none;
+  }
+
+  header h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, #60a5fa, #a78bfa, #f472b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  header p { color: var(--text-dim); font-size: 14px; }
+
+  /* ---------- Stats Grid ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .stat-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-card::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--blue);
+  }
+
+  .stat-card.green::after { background: var(--green); }
+  .stat-card.red::after { background: var(--red); }
+  .stat-card.yellow::after { background: var(--yellow); }
+  .stat-card.purple::after { background: var(--purple); }
+
+  .stat-card .label {
+    font-size: 12px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .stat-card .value {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .stat-card .sub { font-size: 12px; color: var(--text-dim); margin-top: 6px; }
+
+  /* ---------- Progress Bar ---------- */
+  .progress-wrap {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+
+  .progress-wrap .top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+  }
+
+  .progress-bar {
+    height: 12px;
+    background: var(--bg-3);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #22c55e);
+    width: 0%;
+    transition: width 0.6s ease;
+    border-radius: 6px;
+  }
+
+  /* ---------- Health Panel ---------- */
+  .health-panel {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  .health-panel h2 {
+    font-size: 18px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .health-score-big {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: var(--bg-3);
+    border-radius: 12px;
+  }
+
+  .score-circle {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: 800;
+    position: relative;
+    background: conic-gradient(var(--green) 0deg, var(--bg) 0deg);
+    flex-shrink: 0;
+  }
+
+  .score-circle::after {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    background: var(--bg-3);
+  }
+
+  .score-circle span { position: relative; z-index: 1; }
+
+  .score-info { flex: 1; min-width: 200px; }
+
+  .score-info .status-big {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .score-info .status-desc {
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  .module-card {
+    background: var(--bg-3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    transition: transform 0.15s;
+  }
+
+  .module-card:hover { transform: translateY(-2px); }
+
+  .module-card .m-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .module-card .m-name {
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .module-card .m-pct {
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .module-card .m-bar {
+    height: 6px;
+    background: var(--bg);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+
+  .module-card .m-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s ease;
+  }
+
+  .module-card .m-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .badge.not-started { background: rgba(239,68,68,0.15); color: #f87171; }
+  .badge.just-started { background: rgba(249,115,22,0.15); color: #fb923c; }
+  .badge.in-progress  { background: rgba(234,179,8,0.15);  color: #facc15; }
+  .badge.almost-done  { background: rgba(59,130,246,0.15); color: #60a5fa; }
+  .badge.complete     { background: rgba(34,197,94,0.15);  color: #4ade80; }
+
+  /* ---------- Report Actions ---------- */
+  .report-actions {
+    background: linear-gradient(135deg, #1e293b 0%, #172033 100%);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .report-actions .ra-text {
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+
+  .report-actions .ra-text strong { color: var(--text); }
+
+  .report-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+  }
+
+  .btn:hover { transform: translateY(-1px); }
+
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+  }
+
+  .btn-success {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: white;
+  }
+
+  .btn-warning {
+    background: linear-gradient(135deg, #eab308, #ca8a04);
+    color: #1c1917;
+  }
+
+  .btn-secondary {
+    background: var(--bg-3);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  /* ---------- Controls ---------- */
+  .controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+
+  .controls input[type="text"] {
+    flex: 1;
+    min-width: 220px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+  }
+
+  .controls input[type="text"]:focus { border-color: var(--blue); }
+
+  .filter-btn {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .filter-btn:hover { border-color: var(--blue); color: var(--text); }
+  .filter-btn.active { background: var(--blue); color: white; border-color: var(--blue); }
+
+  /* ---------- Folder Card ---------- */
+  .folder {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+
+  .folder-header {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+    gap: 12px;
+  }
+
+  .folder-header:hover { background: var(--bg-3); }
+
+  .folder-icon { font-size: 20px; }
+
+  .folder-name {
+    flex: 1;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .folder-path {
+    font-family: 'Consolas', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+  }
+
+  .folder-count {
+    font-size: 12px;
+    background: var(--bg-3);
+    padding: 4px 10px;
+    border-radius: 12px;
+    color: var(--text-dim);
+  }
+
+  .folder-arrow {
+    transition: transform 0.3s;
+    color: var(--text-dim);
+  }
+
+  .folder.collapsed .folder-arrow { transform: rotate(-90deg); }
+  .folder.collapsed .file-list { display: none; }
+
+  .folder-bar {
+    height: 3px;
+    display: flex;
+    background: var(--bg-3);
+  }
+
+  .folder-bar .bar-ok { background: var(--green); }
+  .folder-bar .bar-missing { background: var(--red); }
+
+  /* ---------- File List ---------- */
+  .file-list {
+    border-top: 1px solid var(--border);
+    padding: 8px 0;
+  }
+
+  .file-row {
+    display: grid;
+    grid-template-columns: 30px 1fr 100px 140px;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(51,65,85,0.5);
+    transition: background 0.15s;
+  }
+
+  .file-row:last-child { border-bottom: none; }
+  .file-row:hover { background: rgba(59,130,246,0.06); }
+
+  .status-icon { font-size: 15px; text-align: center; }
+
+  .file-name {
+    font-family: 'Consolas', monospace;
+    color: var(--text);
+    word-break: break-all;
+  }
+
+  .file-type {
+    font-size: 11px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .status-text {
+    font-size: 12px;
+    font-weight: 600;
+    text-align: right;
+  }
+
+  .status-text.ok { color: var(--green); }
+  .status-text.missing { color: var(--red); }
+  .status-text.checking { color: var(--yellow); }
+  .status-text.empty { color: var(--orange); }
+
+  .file-row.ok .file-name { color: var(--text); }
+  .file-row.missing { background: rgba(239,68,68,0.05); }
+  .file-row.missing .file-name { color: #f87171; }
+  .file-row.empty { background: rgba(249,115,22,0.05); }
+
+  /* ---------- Legend ---------- */
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 14px 20px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+
+  .legend span { display: flex; align-items: center; gap: 6px; }
+
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .dot.green { background: var(--green); }
+  .dot.red { background: var(--red); }
+  .dot.orange { background: var(--orange); }
+  .dot.yellow { background: var(--yellow); }
+
+  /* ---------- Toast ---------- */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--green);
+    padding: 14px 20px;
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 14px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.error { border-left-color: var(--red); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--text-dim);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 30px;
+  }
+
+  footer code {
+    background: var(--bg-3);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'Consolas', monospace;
+    color: var(--blue);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 700px) {
+    body { padding: 12px; }
+    header { padding: 20px; }
+    header h1 { font-size: 20px; }
+    .file-row {
+      grid-template-columns: 24px 1fr;
+      gap: 8px;
+      padding: 10px 14px;
+    }
+    .file-type, .status-text { grid-column: 2; text-align: left; }
+    .folder-path { display: none; }
+    .report-actions { flex-direction: column; align-items: stretch; }
+    .report-btns { width: 100%; }
+    .report-btns .btn { flex: 1; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <h1>🧪 Mateen Online Store — Project Audit</h1>
+    <p>یہ dashboard آپ کے project کی مکمل structure scan کرکے بتائے گا کہ کون سی files/folders موجود ہیں، کون سے missing ہیں، اور project کی overall health کیا ہے۔</p>
+  </header>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card purple">
+      <div class="label">Total Expected</div>
+      <div class="value" id="stat-total">0</div>
+      <div class="sub">کل مطلوبہ files</div>
+    </div>
+    <div class="stat-card green">
+      <div class="label">Found</div>
+      <div class="value" id="stat-found">0</div>
+      <div class="sub">موجود files</div>
+    </div>
+    <div class="stat-card red">
+      <div class="label">Missing</div>
+      <div class="value" id="stat-missing">0</div>
+      <div class="sub">غائب files</div>
+    </div>
+    <div class="stat-card yellow">
+      <div class="label">Empty</div>
+      <div class="value" id="stat-empty">0</div>
+      <div class="sub">خالی files</div>
+    </div>
+  </div>
+
+  <!-- Progress -->
+  <div class="progress-wrap">
+    <div class="top">
+      <span>📊 Completion Progress</span>
+      <span id="progress-text">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- Health Panel -->
+  <div class="health-panel">
+    <h2>💚 Project Health &amp; Testing Report</h2>
+    <div class="health-score-big">
+      <div class="score-circle" id="score-circle">
+        <span id="score-number">0%</span>
+      </div>
+      <div class="score-info">
+        <div class="status-big" id="status-big">⏳ Scanning…</div>
+        <div class="status-desc" id="status-desc">براہ کرم انتظار کریں، project scan ہو رہا ہے…</div>
+      </div>
+    </div>
+    <div class="modules-grid" id="modules-grid"></div>
+  </div>
+
+  <!-- Report Actions -->
+  <div class="report-actions">
+    <div class="ra-text">
+      📄 <strong>Report Actions:</strong> مکمل audit report copy یا download کریں
+      <div style="font-size:12px;margin-top:4px;" id="report-timestamp">—</div>
+    </div>
+    <div class="report-btns">
+      <button class="btn btn-success" id="copy-report">📋 Copy Report</button>
+      <button class="btn btn-primary" id="download-report">📥 Download .txt</button>
+      <button class="btn btn-warning" id="rescan">🔄 Re-Scan</button>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <span><i class="dot green"></i> Found (موجود)</span>
+    <span><i class="dot red"></i> Missing (غائب)</span>
+    <span><i class="dot orange"></i> Empty (خالی)</span>
+    <span><i class="dot yellow"></i> Checking…</span>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <input type="text" id="search" placeholder="🔍 File ya folder تلاش کریں...">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="found">✅ Found</button>
+    <button class="filter-btn" data-filter="missing">❌ Missing</button>
+    <button class="filter-btn" data-filter="empty">⚠️ Empty</button>
+  </div>
+
+  <!-- Results -->
+  <div id="results"></div>
+
+  <!-- Footer -->
+  <footer>
+    <p>⚠️ نوٹ: یہ audit <code>fetch()</code> استعمال کرتا ہے، اس لیے <code>Audit.html</code> کو کسی local server پر چلائیں۔</p>
+    <p style="margin-top:8px;">مثال: <code>python -m http.server 8000</code> یا VS Code کا <code>Live Server</code></p>
+    <p style="margin-top:16px;opacity:0.7;">Mateen Online Store — Project Audit v2.0</p>
+  </footer>
+
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">✅ Copied!</div>
+
+<script>
+/* ============================================================
+   PROJECT STRUCTURE DEFINITION
+   ============================================================ */
+const PROJECT_STRUCTURE = {
+  "Pages/": [ "welcome.html","home.html","products.html","product-details.html","cart.html","checkout.html","login.html","signup.html","profile.html","orders.html","tracking.html","about.html","contact.html","faq.html","terms.html","privacy.html","return-policy.html" ],
+  "Css/": [ "global.css","welcome.css","home.css","products.css","product-details.css","cart.css","checkout.css","auth.css","profile.css","orders.css","tracking.css","info-pages.css","responsive.css" ],
+  "Js/": [ "firebase-config.js","global.js","auth-guard.js","auth.js","welcome.js","home.js","products.js","product-details.js","cart.js","checkout.js","profile.js","orders.js","tracking.js" ],
+  "Admin/": [ "admin.html" ],
+  "Admin/Css/": [ "admin-auth.css","admin.css" ],
+  "Admin/Js/": [ "admin-auth.js","admin.js" ],
+  "Manager/": [ "manager.html" ],
+  "Manager/Css/": [ "manager-auth.css","manager.css" ],
+  "Manager/Js/": [ "manager-auth.js","manager.js" ],
+  "Delivery/": [ "delivery.html" ],
+  "Delivery/Css/": [ "delivery.css" ],
+  "Delivery/Js/": [ "delivery.js" ],
+  "Backend/": [ ".env","server.js","package.json" ],
+  "Backend/Config/": [ "config.js" ],
+  "Backend/Controllers/": [ "auth.controller.js","product.controller.js","order.controller.js","payment.controller.js","admin.controller.js","delivery.controller.js" ],
+  "Backend/Routes/": [ "auth.routes.js","products.routes.js","orders.routes.js","payments.routes.js","admin.routes.js","delivery.routes.js" ],
+  "Backend/Middleware/": [ "auth.js","roles.js","error-handler.js" ],
+  "Backend/Database/": [ "database.js" ],
+  "ROOT": [ "Indux.html","firestore.rules","PROJECT_STATUS.txt" ]
+};
+
+/* ============================================================
+   FOLDER META
+   ============================================================ */
+const FOLDER_META = {
+  "Pages/":            { icon: "🧑‍💻", name: "Customer Pages" },
+  "Css/":              { icon: "🎨", name: "Customer Styles" },
+  "Js/":               { icon: "⚙️", name: "Customer Scripts" },
+  "Admin/":            { icon: "👑", name: "Admin Panel" },
+  "Admin/Css/":        { icon: "🎨", name: "Admin Styles" },
+  "Admin/Js/":         { icon: "⚙️", name: "Admin Scripts" },
+  "Manager/":          { icon: "📊", name: "Manager Panel" },
+  "Manager/Css/":      { icon: "🎨", name: "Manager Styles" },
+  "Manager/Js/":       { icon: "⚙️", name: "Manager Scripts" },
+  "Delivery/":         { icon: "🚚", name: "Delivery Panel" },
+  "Delivery/Css/":     { icon: "🎨", name: "Delivery Styles" },
+  "Delivery/Js/":      { icon: "⚙️", name: "Delivery Scripts" },
+  "Backend/":          { icon: "🖥️", name: "Backend Server" },
+  "Backend/Config/":   { icon: "🔧", name: "Backend Config" },
+  "Backend/Controllers/": { icon: "🎛️", name: "Controllers" },
+  "Backend/Routes/":   { icon: "🛣️", name: "API Routes" },
+  "Backend/Middleware/": { icon: "🛡️", name: "Middleware" },
+  "Backend/Database/": { icon: "🗄️", name: "Database" },
+  "ROOT":              { icon: "🏠", name: "Root Files" }
+};
+
+/* ============================================================
+   MODULES (grouping of folders for health testing)
+   ============================================================ */
+const MODULES = [
+  {
+    key: "customer",
+    name: "Customer Frontend",
+    icon: "🛍️",
+    folders: ["Pages/", "Css/", "Js/"]
+  },
+  {
+    key: "admin",
+    name: "Admin Panel",
+    icon: "👑",
+    folders: ["Admin/", "Admin/Css/", "Admin/Js/"]
+  },
+  {
+    key: "manager",
+    name: "Manager Panel",
+    icon: "📊",
+    folders: ["Manager/", "Manager/Css/", "Manager/Js/"]
+  },
+  {
+    key: "delivery",
+    name: "Delivery Panel",
+    icon: "🚚",
+    folders: ["Delivery/", "Delivery/Css/", "Delivery/Js/"]
+  },
+  {
+    key: "backend",
+    name: "Backend API",
+    icon: "🖥️",
+    folders: ["Backend/", "Backend/Config/", "Backend/Controllers/", "Backend/Routes/", "Backend/Middleware/", "Backend/Database/"]
+  },
+  {
+    key: "root",
+    name: "Root / Config",
+    icon: "🏠",
+    folders: ["ROOT"]
+  }
+];
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const state = {
+  results: {},
+  filter: "all",
+  search: "",
+  scanning: false,
+  scanTime: null
+};
+
+/* ============================================================
+   INIT
+   ============================================================ */
+document.addEventListener("DOMContentLoaded", () => {
+  bindControls();
+  renderSkeleton();
+  scanAll();
+});
+
+/* ============================================================
+   SCAN LOGIC
+   ============================================================ */
+function getFullPath(folderKey, file) {
+  if (folderKey === "ROOT") return file;
+  return folderKey + file;
+}
+
+async function checkFile(path) {
+  try {
+    const res = await fetch(path + "?t=" + Date.now(), { method: "GET", cache: "no-store" });
+    if (!res.ok) return "missing";
+    const ct = res.headers.get("content-type") || "";
+    const isNonHtmlFile = !path.endsWith(".html");
+    if (isNonHtmlFile && ct.includes("text/html")) return "missing";
+    const text = await res.text();
+    if (!text || text.trim().length === 0) return "empty";
+    if (isNonHtmlFile && text.trim().toLowerCase().startsWith("<!doctype html")) return "missing";
+    return "ok";
+  } catch (e) {
+    return "missing";
+  }
+}
+
+async function scanAll() {
+  if (state.scanning) return;
+  state.scanning = true;
+  state.results = {};
+  const allPaths = [];
+  for (const folder of Object.keys(PROJECT_STRUCTURE)) {
+    for (const file of PROJECT_STRUCTURE[folder]) {
+      const p = getFullPath(folder, file);
+      state.results[p] = "checking";
+      allPaths.push(p);
+    }
+  }
+
+  renderAll();
+  updateStats();
+  renderHealthPanel();
+
+  const CHUNK = 8;
+  for (let i = 0; i < allPaths.length; i += CHUNK) {
+    const chunk = allPaths.slice(i, i + CHUNK);
+    await Promise.all(chunk.map(async (p) => {
+      state.results[p] = await checkFile(p);
+    }));
+    renderAll();
+    updateStats();
+    renderHealthPanel();
+  }
+
+  state.scanning = false;
+  state.scanTime = new Date();
+  renderAll();
+  updateStats();
+  renderHealthPanel();
+  updateTimestamp();
+}
+
+/* ============================================================
+   MODULE STATS
+   ============================================================ */
+function getModuleStats() {
+  return MODULES.map((mod) => {
+    let total = 0, found = 0, missing = 0, empty = 0, checking = 0;
+    mod.folders.forEach((f) => {
+      const files = PROJECT_STRUCTURE[f] || [];
+      files.forEach((file) => {
+        const p = getFullPath(f, file);
+        const status = state.results[p] || "checking";
+        total++;
+        if (status === "ok") found++;
+        else if (status === "missing") missing++;
+        else if (status === "empty") empty++;
+        else checking++;
+      });
+    });
+    const pct = total ? Math.round((found / total) * 100) : 0;
+    return { ...mod, total, found, missing, empty, checking, pct };
+  });
+}
+
+function getStatusLevel(pct, checking) {
+  if (checking > 0 && pct === 0) return { key: "checking", label: "Checking…", icon: "⏳", color: "var(--yellow)" };
+  if (pct === 0)   return { key: "not-started",  label: "NOT STARTED",  icon: "🔴", color: "var(--red)" };
+  if (pct < 34)    return { key: "just-started", label: "JUST STARTED", icon: "🟠", color: "var(--orange)" };
+  if (pct < 67)    return { key: "in-progress",  label: "IN PROGRESS",  icon: "🟡", color: "var(--yellow)" };
+  if (pct < 100)   return { key: "almost-done",  label: "ALMOST DONE",  icon: "🔵", color: "var(--blue)" };
+  return { key: "complete", label: "COMPLETE", icon: "🟢", color: "var(--green)" };
+}
+
+/* ============================================================
+   RENDER HEALTH PANEL
+   ============================================================ */
+function renderHealthPanel() {
+  const values = Object.values(state.results);
+  const total = values.length;
+  const found = values.filter(v => v === "ok").length;
+  const checking = values.filter(v => v === "checking").length;
+  const pct = total ? Math.round((found / total) * 100) : 0;
+  const status = getStatusLevel(pct, checking);
+
+  // Score circle
+  const circle = document.getElementById("score-circle");
+  const angle = (pct / 100) * 360;
+  circle.style.background = `conic-gradient(${status.color} ${angle}deg, var(--bg-3) ${angle}deg)`;
+  document.getElementById("score-number").textContent = pct + "%";
+
+  // Big status
+  const statusBig = document.getElementById("status-big");
+  statusBig.textContent = `${status.icon}  ${status.label}`;
+  statusBig.style.color = status.color;
+
+  const descMap = {
+    "checking": "Scan جاری ہے، براہ کرم انتظار کریں…",
+    "not-started": "ابھی project کا کوئی حصہ مکمل نہیں ہوا — شروعات کریں!",
+    "just-started": "کام شروع ہو گیا ہے، لیکن ابھی بہت کچھ باقی ہے۔",
+    "in-progress": "اچھی پیش رفت جاری ہے! آدھا کام مکمل ہو چکا ہے۔",
+    "almost-done": "تقریباً مکمل! تھوڑا سا کام باقی ہے۔",
+    "complete": "🎉 مبارک ہو! پورا project مکمل ہو چکا ہے۔"
+  };
+  document.getElementById("status-desc").textContent = descMap[status.key] || "";
+
+  // Modules grid
+  const grid = document.getElementById("modules-grid");
+  grid.innerHTML = "";
+  const moduleStats = getModuleStats();
+
+  moduleStats.forEach((m) => {
+    const s = getStatusLevel(m.pct, m.checking);
+    const card = document.createElement("div");
+    card.className = "module-card";
+    card.innerHTML = `
+      <div class="m-top">
+        <div class="m-name">${m.icon} ${m.name}</div>
+        <div class="m-pct" style="color:${s.color}">${m.pct}%</div>
+      </div>
+      <div class="m-bar">
+        <div class="m-bar-fill" style="width:${m.pct}%;background:${s.color}"></div>
+      </div>
+      <div class="m-info">
+        <span class="badge ${s.key}">${s.label}</span>
+        <span>${m.found} / ${m.total} files</span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+/* ============================================================
+   RENDER FILE LIST
+   ============================================================ */
+function renderSkeleton() {
+  document.getElementById("results").innerHTML = "";
+}
+
+function renderAll() {
+  const container = document.getElementById("results");
+  container.innerHTML = "";
+
+  for (const folder of Object.keys(PROJECT_STRUCTURE)) {
+    const files = PROJECT_STRUCTURE[folder];
+    const meta = FOLDER_META[folder] || { icon: "📁", name: folder };
+
+    let ok = 0, missing = 0, empty = 0, checking = 0;
+    const fileRows = files.map((f) => {
+      const p = getFullPath(folder, f);
+      const status = state.results[p] || "checking";
+      if (status === "ok") ok++;
+      else if (status === "missing") missing++;
+      else if (status === "empty") empty++;
+      else checking++;
+      return { name: f, path: p, status };
+    });
+
+    const visibleRows = fileRows.filter((row) => {
+      if (state.search) {
+        const q = state.search.toLowerCase();
+        const hay = (row.name + " " + folder + " " + meta.name).toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      if (state.filter === "all") return true;
+      if (state.filter === "found") return row.status === "ok";
+      if (state.filter === "missing") return row.status === "missing";
+      if (state.filter === "empty") return row.status === "empty";
+      return true;
+    });
+
+    if (visibleRows.length === 0 && (state.search || state.filter !== "all")) continue;
+
+    const folderEl = document.createElement("div");
+    folderEl.className = "folder";
+
+    const total = files.length;
+    const barOkPct = total ? (ok / total) * 100 : 0;
+    const barMissingPct = total ? (missing / total) * 100 : 0;
+    const barEmptyPct = total ? (empty / total) * 100 : 0;
+
+    folderEl.innerHTML = `
+      <div class="folder-header" onclick="this.parentElement.classList.toggle('collapsed')">
+        <span class="folder-icon">${meta.icon}</span>
+        <span class="folder-name">${meta.name}</span>
+        <span class="folder-path">${folder === "ROOT" ? "./" : folder}</span>
+        <span class="folder-count">${ok}/${total} found</span>
+        <span class="folder-arrow">▼</span>
+      </div>
+      <div class="folder-bar">
+        <div class="bar-ok" style="width:${barOkPct}%"></div>
+        <div class="bar-missing" style="width:${barMissingPct}%"></div>
+        <div class="bar-empty" style="width:${barEmptyPct}%;background:var(--orange)"></div>
+      </div>
+      <div class="file-list"></div>
+    `;
+
+    const listEl = folderEl.querySelector(".file-list");
+    visibleRows.forEach((row) => {
+      const rowEl = document.createElement("div");
+      rowEl.className = "file-row " + row.status;
+
+      let icon = "⏳", statusText = "Checking…", statusClass = "checking";
+      if (row.status === "ok")      { icon = "✅"; statusText = "Found";   statusClass = "ok"; }
+      if (row.status === "missing") { icon = "❌"; statusText = "Missing"; statusClass = "missing"; }
+      if (row.status === "empty")   { icon = "⚠️"; statusText = "Empty";   statusClass = "empty"; }
+
+      const ext = row.name.includes(".") ? row.name.split(".").pop().toUpperCase() : "FILE";
+
+      rowEl.innerHTML = `
+        <span class="status-icon">${icon}</span>
+        <span class="file-name">${row.name}</span>
+        <span class="file-type">${ext}</span>
+        <span class="status-text ${statusClass}">${statusText}</span>
+      `;
+      listEl.appendChild(rowEl);
+    });
+
+    container.appendChild(folderEl);
+  }
+}
+
+/* ============================================================
+   STATS
+   ============================================================ */
+function updateStats() {
+  const values = Object.values(state.results);
+  const total = values.length;
+  const found = values.filter(v => v === "ok").length;
+  const missing = values.filter(v => v === "missing").length;
+  const empty = values.filter(v => v === "empty").length;
+
+  document.getElementById("stat-total").textContent = total;
+  document.getElementById("stat-found").textContent = found;
+  document.getElementById("stat-missing").textContent = missing;
+  document.getElementById("stat-empty").textContent = empty;
+
+  const done = total - values.filter(v => v === "checking").length;
+  const pct = total ? Math.round((found / total) * 100) : 0;
+  document.getElementById("progress-fill").style.width = pct + "%";
+  document.getElementById("progress-text").textContent = pct + "%  (" + done + "/" + total + " checked)";
+}
+
+function updateTimestamp() {
+  if (!state.scanTime) return;
+  const t = state.scanTime.toLocaleString();
+  document.getElementById("report-timestamp").textContent = "🕒 Last scan: " + t;
+}
+
+/* ============================================================
+   REPORT GENERATION
+   ============================================================ */
+function generateReportText() {
+  const values = Object.values(state.results);
+  const total = values.length;
+  const found = values.filter(v => v === "ok").length;
+  const missing = values.filter(v => v === "missing").length;
+  const empty = values.filter(v => v === "empty").length;
+  const pct = total ? Math.round((found / total) * 100) : 0;
+  const status = getStatusLevel(pct, 0);
+
+  const L = [];
+  const line = "=".repeat(60);
+  const dash = "-".repeat(60);
+
+  L.push(line);
+  L.push("   MATEEN ONLINE STORE — PROJECT AUDIT REPORT");
+  L.push(line);
+  L.push("Generated : " + new Date().toLocaleString());
+  L.push("URL       : " + window.location.href);
+  L.push("");
+
+  L.push(dash);
+  L.push("  OVERALL SUMMARY");
+  L.push(dash);
+  L.push("  Total Expected : " + total);
+  L.push("  Found          : " + found);
+  L.push("  Missing        : " + missing);
+  L.push("  Empty          : " + empty);
+  L.push("  Health Score   : " + pct + "%");
+  L.push("  Status         : " + status.label);
+  L.push("");
+
+  L.push(dash);
+  L.push("  MODULE BREAKDOWN");
+  L.push(dash);
+  const moduleStats = getModuleStats();
+  moduleStats.forEach((m) => {
+    const s = getStatusLevel(m.pct, 0);
+    const name = (m.name + "                ").slice(0, 20);
+    L.push(`  ${m.icon} ${name}  ${String(m.pct).padStart(3)}%  (${m.found}/${m.total})  [${s.label}]`);
+  });
+  L.push("");
+
+  L.push(dash);
+  L.push("  FOLDER BREAKDOWN");
+  L.push(dash);
+  for (const folder of Object.keys(PROJECT_STRUCTURE)) {
+    const files = PROJECT_STRUCTURE[folder];
+    let ok = 0, miss = 0, emp = 0;
+    files.forEach((f) => {
+      const p = getFullPath(folder, f);
+      const s = state.results[p] || "checking";
+      if (s === "ok") ok++;
+      else if (s === "missing") miss++;
+      else if (s === "empty") emp++;
+    });
+    const folderName = folder === "ROOT" ? "./" : folder;
+    L.push(`  ${folderName.padEnd(24)} Found: ${ok}/${files.length}  Missing: ${miss}  Empty: ${emp}`);
+  }
+  L.push("");
+
+  L.push(dash);
+  L.push("  DETAILED FILE LIST");
+  L.push(dash);
+  for (const folder of Object.keys(PROJECT_STRUCTURE)) {
+    const folderName = folder === "ROOT" ? "./" : folder;
+    L.push("");
+    L.push("  📁 " + folderName);
+    PROJECT_STRUCTURE[folder].forEach((file) => {
+      const p = getFullPath(folder, file);
+      const s = state.results[p] || "checking";
+      const icon = s === "ok" ? "✅" : s === "missing" ? "❌" : s === "empty" ? "⚠️" : "⏳";
+      L.push(`     ${icon}  ${file}  [${s.toUpperCase()}]`);
+    });
+  }
+  L.push("");
+
+  L.push(dash);
+  L.push("  RECOMMENDATIONS");
+  L.push(dash);
+  if (pct === 0) {
+    L.push("  🔴 Project abhi shuru nahi hua.");
+    L.push("     → Pehle 'Js/firebase-config.js' banayein.");
+    L.push("     → Phir 'Css/global.css' aur 'Js/global.js'.");
+    L.push("     → Phir 'Pages/welcome.html' + 'Js/welcome.js'.");
+  } else if (pct < 34) {
+    L.push("  🟠 Project shuru ho chuka hai — abhi bahut kaam baqi hai.");
+    L.push("     → Customer side ki missing files complete karein.");
+    L.push("     → Admin panel set up karein.");
+  } else if (pct < 67) {
+    L.push("  🟡 Aadha kaam mukammal. Achi raftar hai!");
+    L.push("     → Backend files par tawajjo dein.");
+    L.push("     → Role-based panels (Admin/Manager/Delivery) complete karein.");
+  } else if (pct < 100) {
+    L.push("  🔵 Almost done! Sirf chand files baqi hain.");
+    L.push("     → Missing files ki list check karein.");
+    L.push("     → Testing aur deployment ki taraf barein.");
+  } else {
+    L.push("  🟢 MUBARAK HO! Poora project complete hai.");
+    L.push("     → Ab testing, deployment aur optimization karein.");
+  }
+  L.push("");
+  L.push(line);
+  L.push("  Report generated by Mateen Online Store Audit v2.0");
+  L.push(line);
+
+  return L.join("\n");
+}
+
+/* ============================================================
+   COPY & DOWNLOAD
+   ============================================================ */
+async function copyReport() {
+  if (state.scanning) {
+    showToast("⏳ Scan abhi chal raha hai — intezar karein", true);
+    return;
+  }
+  const text = generateReportText();
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast("✅ Report clipboard mein copy ho gaya!");
+  } catch (e) {
+    // Fallback
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand("copy");
+      showToast("✅ Report clipboard mein copy ho gaya!");
+    } catch (err) {
+      showToast("❌ Copy fail ho gaya", true);
+    }
+    document.body.removeChild(ta);
+  }
+}
+
+function downloadReport() {
+  if (state.scanning) {
+    showToast("⏳ Scan abhi chal raha hai — intezar karein", true);
+    return;
+  }
+  const text = generateReportText();
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  const ts = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
+  a.href = url;
+  a.download = `audit-report-${ts}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast("📥 Report download shuru ho gaya!");
+}
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+let toastTimer = null;
+function showToast(msg, isError = false) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.className = "toast" + (isError ? " error" : "");
+  // force reflow
+  void t.offsetWidth;
+  t.classList.add("show");
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove("show"), 2500);
+}
+
+/* ============================================================
+   CONTROLS
+   ============================================================ */
+function bindControls() {
+  document.getElementById("search").addEventListener("input", (e) => {
+    state.search = e.target.value.trim();
+    renderAll();
+  });
+
+  document.querySelectorAll(".filter-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      state.filter = btn.dataset.filter;
+      renderAll();
+    });
+  });
+
+  document.getElementById("rescan").addEventListener("click", () => {
+    if (state.scanning) return;
+    scanAll();
+  });
+
+  document.getElementById("copy-report").addEventListener("click", copyReport);
+  document.getElementById("download-report").addEventListener("click", downloadReport);
+}
+</script>
+</body>
+</html>

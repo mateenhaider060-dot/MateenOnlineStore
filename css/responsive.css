@@ -1,0 +1,971 @@
+/* ============================================================
+   RESPONSIVE.CSS — مشترکہ موبائل اور ٹیبلٹ ایڈجسٹمنٹس
+   فائل: Css/responsive.css
+   مقصد: تمام صفحات (Home, Products, Cart, Checkout, Orders,
+          Tracking, Profile, Auth) کو موبائل پر بہتر بنانا
+   ============================================================ */
+
+/* ============================================================
+   🌟 1. TABLET (max-width: 992px)
+   ============================================================ */
+@media (max-width: 992px) {
+
+  /* Container padding */
+  .container {
+    padding: 0 14px;
+  }
+
+  /* Headings */
+  h1 { font-size: 1.85rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.2rem; }
+
+  /* Header */
+  .header-inner {
+    gap: 12px;
+  }
+
+  .logo {
+    font-size: 17px;
+  }
+
+  .logo i {
+    font-size: 20px;
+  }
+
+  .search-bar {
+    max-width: 340px;
+  }
+
+  /* Home banner */
+  .banner-slider {
+    height: 260px;
+  }
+
+  .banner-content h2 {
+    font-size: 26px;
+  }
+
+  /* Products grid */
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: 14px;
+  }
+
+  /* Footer */
+  .footer-inner {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 24px;
+  }
+}
+
+/* ============================================================
+   🌟 2. MOBILE LARGE (max-width: 768px)
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* ---------- Global ---------- */
+  body {
+    font-size: 15px;
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+
+  h1 { font-size: 1.55rem; }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.1rem; }
+  h4 { font-size: 1rem; }
+
+  .section-title {
+    font-size: 1.15rem;
+    margin-bottom: 14px;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    padding: 10px 18px;
+    font-size: 0.9rem;
+  }
+
+  .btn-lg {
+    padding: 13px 24px;
+    font-size: 1rem;
+  }
+
+  /* ---------- Header ---------- */
+  .main-header {
+    padding: 10px 0;
+  }
+
+  .header-inner {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+  }
+
+  .logo {
+    order: 1;
+    font-size: 15px;
+    gap: 6px;
+  }
+
+  .logo i {
+    font-size: 18px;
+  }
+
+  .header-actions {
+    order: 2;
+    gap: 8px;
+  }
+
+  .icon-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 14px;
+  }
+
+  .lang-btn {
+    min-width: 50px;
+    padding: 0 10px;
+    font-size: 12px;
+  }
+
+  .search-bar {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 4px;
+    padding: 5px 5px 5px 14px;
+  }
+
+  .search-bar input {
+    font-size: 13px;
+    padding: 7px;
+  }
+
+  .search-bar button {
+    width: 34px;
+    height: 34px;
+  }
+
+  /* ---------- Banner ---------- */
+  .banner-section {
+    padding: 16px 0;
+  }
+
+  .banner-slider {
+    height: 220px;
+    border-radius: 12px;
+  }
+
+  .banner-slide {
+    padding: 20px;
+  }
+
+  .banner-content h2 {
+    font-size: 21px;
+    margin-bottom: 8px;
+  }
+
+  .banner-content p {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  .btn-primary {
+    padding: 10px 22px;
+    font-size: 13px;
+  }
+
+  /* ---------- Categories ---------- */
+  .categories-section,
+  .featured-section {
+    padding: 22px 0;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+    gap: 10px;
+  }
+
+  .category-card {
+    padding: 12px 6px;
+  }
+
+  .category-card img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .category-card span {
+    font-size: 12px;
+  }
+
+  /* ---------- Products Grid ---------- */
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .product-card img {
+    height: 150px;
+  }
+
+  .product-info {
+    padding: 10px;
+  }
+
+  .product-title {
+    font-size: 13px;
+  }
+
+  .product-price {
+    font-size: 14px;
+  }
+
+  /* ---------- Section Headers ---------- */
+  .section-header {
+    margin-bottom: 14px;
+  }
+
+  .view-all {
+    font-size: 13px;
+  }
+
+  /* ---------- Footer ---------- */
+  .main-footer {
+    margin-top: 30px;
+    padding-top: 30px;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 22px;
+    padding-bottom: 22px;
+  }
+
+  .footer-col h4 {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+
+  .footer-col p,
+  .footer-col li {
+    font-size: 13px;
+  }
+
+  .social-icons {
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .footer-bottom {
+    font-size: 12px;
+    padding: 14px;
+  }
+
+  /* ---------- Toast ---------- */
+  #toast-container {
+    top: 12px;
+    right: 12px;
+    left: 12px;
+  }
+
+  .toast {
+    min-width: auto;
+    max-width: 100%;
+    font-size: 0.85rem;
+    padding: 12px 14px;
+  }
+
+  /* ---------- Page Titles (Products/Orders/etc) ---------- */
+  .page-title-section {
+    padding: 20px 0 8px;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .page-subtitle {
+    font-size: 0.85rem;
+  }
+
+  /* ---------- Product Details ---------- */
+  .product-details-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .product-gallery {
+    position: static;
+  }
+
+  .product-detail-title {
+    font-size: 1.25rem;
+  }
+
+  .current-price {
+    font-size: 1.3rem;
+  }
+
+  .old-price {
+    font-size: 0.9rem;
+  }
+
+  .thumbnail-row img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .action-buttons .btn {
+    min-width: 130px;
+    font-size: 0.85rem;
+  }
+
+  .tabs-header {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tab-btn {
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+  }
+
+  .specs-list {
+    grid-template-columns: 1fr;
+  }
+
+  /* ---------- Cart ---------- */
+  .cart-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .cart-summary {
+    position: static;
+    padding: 18px;
+  }
+
+  .cart-header-row {
+    display: none;
+  }
+
+  .cart-item {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 14px;
+    position: relative;
+  }
+
+  .cart-item-product {
+    gap: 10px;
+  }
+
+  .cart-item-product img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .cart-item-product a {
+    font-size: 0.9rem;
+  }
+
+  .cart-item-price::before {
+    content: "Price: ";
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .cart-item-total::before {
+    content: "Total: ";
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  .cart-item-remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  .coupon-box {
+    flex-direction: column;
+  }
+
+  .coupon-box button {
+    width: 100%;
+  }
+
+  /* ---------- Checkout ---------- */
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-summary {
+    position: static;
+    order: -1; /* Mobile par summary pehle dikhe */
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-section {
+    padding: 18px;
+  }
+
+  .payment-option-body {
+    padding: 12px;
+  }
+
+  .payment-option-body i {
+    font-size: 1.15rem;
+    width: 28px;
+  }
+
+  /* ---------- Orders ---------- */
+  .orders-tabs {
+    gap: 6px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .orders-tabs .tab-btn {
+    padding: 7px 14px;
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+
+  .order-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 14px 16px;
+  }
+
+  .order-card-header .order-meta {
+    gap: 10px;
+    font-size: 0.8rem;
+  }
+
+  .order-card-body {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 14px 16px;
+  }
+
+  .order-items-preview {
+    gap: 8px;
+  }
+
+  .order-items-preview img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .order-actions {
+    justify-content: stretch;
+  }
+
+  .order-actions .btn {
+    flex: 1;
+  }
+
+  /* ---------- Tracking ---------- */
+  .track-search {
+    flex-wrap: wrap;
+    padding: 10px;
+    border-radius: var(--radius-md);
+  }
+
+  .track-search input {
+    width: 100%;
+    order: 2;
+    padding: 8px 4px;
+  }
+
+  .track-search .btn {
+    order: 3;
+    width: 100%;
+    margin-top: 6px;
+    border-radius: var(--radius);
+  }
+
+  .track-order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .track-header-right {
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .track-order-no {
+    font-size: 1.1rem;
+  }
+
+  .progress-steps {
+    flex-direction: column;
+    gap: 18px;
+    padding: 20px 16px;
+  }
+
+  .progress-steps::before,
+  .progress-line-active {
+    display: none;
+  }
+
+  .progress-step {
+    flex-direction: row;
+    text-align: left;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .progress-step .step-icon {
+    margin-bottom: 0;
+    width: 42px;
+    height: 42px;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  .progress-step .step-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .track-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .track-card {
+    padding: 16px;
+  }
+
+  .track-item img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .track-help {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .track-help > div {
+    min-width: auto;
+  }
+
+  /* ---------- Profile ---------- */
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-sidebar {
+    position: static;
+  }
+
+  .profile-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .profile-nav-item {
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.72rem;
+    padding: 11px 14px;
+    white-space: nowrap;
+    border-bottom: none;
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .profile-nav-item.active {
+    border-left: none;
+    border-bottom: 3px solid var(--primary);
+  }
+
+  .profile-form .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-section-card {
+    padding: 18px;
+  }
+
+  .form-actions {
+    justify-content: stretch;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+
+  /* ---------- Auth (Login/Signup) ---------- */
+  .auth-container {
+    grid-template-columns: 1fr;
+    min-height: 100vh;
+  }
+
+  .auth-brand {
+    display: none;
+  }
+
+  .auth-form-wrap {
+    padding: 30px 20px;
+  }
+
+  .auth-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .auth-lang {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+  }
+
+  /* ---------- Welcome ---------- */
+  .welcome-container {
+    padding: 24px 18px;
+  }
+
+  .welcome-logo h1 {
+    font-size: 1.5rem;
+  }
+
+  .welcome-logo i {
+    font-size: 42px;
+  }
+
+  .welcome-hero h2 {
+    font-size: 1.4rem;
+  }
+
+  .welcome-features {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* ---------- Modal ---------- */
+  .modal-box,
+  .order-modal-box {
+    padding: 22px 18px;
+    border-radius: var(--radius-md);
+    max-height: 92vh;
+  }
+
+  .modal-box h2,
+  .modal-title {
+    font-size: 1.15rem;
+  }
+
+  .modal-icon.success {
+    font-size: 3rem;
+  }
+
+  /* ---------- Tables ---------- */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* ---------- Empty State ---------- */
+  .empty-state {
+    padding: 40px 16px;
+  }
+
+  .empty-state-icon {
+    font-size: 2.5rem;
+  }
+
+  .empty-state h3 {
+    font-size: 1.1rem;
+  }
+
+  .empty-state p {
+    font-size: 0.85rem;
+  }
+}
+
+/* ============================================================
+   🌟 3. MOBILE SMALL (max-width: 480px)
+   ============================================================ */
+@media (max-width: 480px) {
+
+  /* Typography */
+  h1 { font-size: 1.35rem; }
+  h2 { font-size: 1.2rem; }
+
+  .section-title {
+    font-size: 1.05rem;
+  }
+
+  /* Buttons */
+  .btn {
+    padding: 9px 16px;
+    font-size: 0.85rem;
+  }
+
+  .btn-sm {
+    padding: 7px 13px;
+    font-size: 0.78rem;
+  }
+
+  /* Header */
+  .logo {
+    font-size: 14px;
+  }
+
+  .logo i {
+    font-size: 16px;
+  }
+
+  .icon-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 13px;
+  }
+
+  .lang-btn {
+    min-width: 46px;
+    font-size: 11px;
+  }
+
+  /* Banner */
+  .banner-slider {
+    height: 190px;
+  }
+
+  .banner-content h2 {
+    font-size: 18px;
+  }
+
+  .banner-content p {
+    font-size: 12px;
+  }
+
+  /* Products */
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .product-card img {
+    height: 200px;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  /* Cart */
+  .cart-item-product img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .cart-item-product a {
+    font-size: 0.82rem;
+  }
+
+  /* Track order */
+  .track-order-no {
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+  }
+
+  .status-badge {
+    font-size: 0.68rem;
+    padding: 4px 10px;
+  }
+
+  /* Order cards */
+  .order-items-preview img {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Forms */
+  .form-input,
+  .form-select,
+  .form-textarea {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+
+  /* Profile */
+  .avatar-wrap {
+    width: 90px;
+    height: 90px;
+  }
+
+  .profile-name {
+    font-size: 1rem;
+  }
+
+  /* Welcome */
+  .welcome-actions .btn {
+    padding: 12px 18px;
+    font-size: 0.9rem;
+  }
+
+  .feature-item {
+    font-size: 0.85rem;
+  }
+
+  /* Footer */
+  .footer-col h4 {
+    font-size: 14px;
+  }
+
+  .footer-col p,
+  .footer-col li {
+    font-size: 12px;
+  }
+
+  /* Toast */
+  .toast {
+    font-size: 0.8rem;
+    padding: 10px 12px;
+  }
+
+  /* Modal */
+  .modal-box,
+  .order-modal-box {
+    padding: 18px 14px;
+  }
+
+  .modal-actions .btn {
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   🌟 4. EXTRA SMALL (max-width: 360px)
+   ============================================================ */
+@media (max-width: 360px) {
+
+  .logo span {
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .banner-content h2 {
+    font-size: 16px;
+  }
+
+  .btn {
+    font-size: 0.8rem;
+    padding: 8px 14px;
+  }
+
+  .product-card img {
+    height: 170px;
+  }
+
+  .search-bar input {
+    font-size: 12px;
+  }
+}
+
+/* ============================================================
+   🌟 5. LANDSCAPE MOBILE (max-height: 500px)
+   ============================================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+
+  .banner-slider {
+    height: 180px;
+  }
+
+  .welcome-container {
+    padding: 16px;
+  }
+
+  .welcome-features {
+    display: none;
+  }
+}
+
+/* ============================================================
+   🌟 6. RTL SPECIFIC MOBILE FIXES
+   ============================================================ */
+@media (max-width: 768px) {
+  html[dir="rtl"] .cart-item-remove {
+    right: auto;
+    left: 10px;
+  }
+
+  html[dir="rtl"] .profile-nav-item {
+    border-right: none;
+    border-left: 1px solid var(--border);
+  }
+
+  html[dir="rtl"] .progress-step {
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+}
+
+/* ============================================================
+   🌟 7. TOUCH DEVICE ENHANCEMENTS
+   ============================================================ */
+@media (hover: none) and (pointer: coarse) {
+  /* Hover effects disable for touch devices */
+  .product-card:hover,
+  .category-card:hover,
+  .btn-primary:hover {
+    transform: none;
+  }
+
+  /* Bigger tap targets */
+  .icon-btn,
+  .btn {
+    min-height: 40px;
+  }
+}
+
+/* ============================================================
+   🌟 8. PRINT STYLES
+   ============================================================ */
+@media print {
+  .main-header,
+  .main-footer,
+  .header-actions,
+  .lang-btn,
+  .action-buttons,
+  .btn,
+  #toast-container,
+  #loader {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .container {
+    max-width: 100%;
+  }
+}

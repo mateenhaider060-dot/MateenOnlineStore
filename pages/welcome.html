@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mateen Online Store — Welcome</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/welcome.css">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="welcome-body">
+
+  <button class="lang-btn-floating" id="langToggle" data-i18n-title="language" title="Language">
+    <i class="fa-solid fa-globe"></i>
+    <span id="langLabel">اردو</span>
+  </button>
+
+  <div class="welcome-wrapper">
+
+    <div class="welcome-hero">
+      <div class="welcome-icon">
+        <span>🛍️</span>
+      </div>
+      <h1 class="welcome-title" data-i18n="brand">Mateen Store</h1>
+      <p class="welcome-tagline" data-i18n="welcome_tagline">
+        Your choice, our responsibility
+      </p>
+    </div>
+
+    <div class="welcome-content">
+
+      <h2 class="welcome-heading" data-i18n="welcome_heading">Welcome! 👋</h2>
+      <p class="welcome-text" data-i18n="welcome_text">
+        Pakistan's best online store. Start shopping now and get things delivered to your home.
+      </p>
+
+      <div class="welcome-features">
+        <div class="feature-item">
+          <span class="feature-icon">✅</span>
+          <span data-i18n="feature_fast_delivery">Fast Delivery</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">✅</span>
+          <span data-i18n="feature_original">Original Products</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-icon">✅</span>
+          <span data-i18n="feature_easy_return">Easy Returns</span>
+        </div>
+      </div>
+
+      <div class="welcome-actions">
+        <a href="home.html" class="btn btn-primary btn-block btn-lg">
+          🛍️ <span data-i18n="start_shopping">Start Shopping</span>
+        </a>
+        <a href="login.html" class="btn btn-outline btn-block">
+          🔑 <span data-i18n="login">Login</span>
+        </a>
+        <a href="signup.html" class="btn btn-ghost btn-block">
+          ✍️ <span data-i18n="signup_new">Create New Account</span>
+        </a>
+      </div>
+
+      <p class="welcome-footer">
+        <span data-i18n="agree_terms">By continuing, you agree to our</span>
+        <a href="terms.html" class="link" data-i18n="terms">Terms</a>
+        <span data-i18n="and">and</span>
+        <a href="privacy.html" class="link" data-i18n="privacy">Privacy Policy</a>
+      </p>
+
+    </div>
+  </div>
+
+  <script type="module" src="../js/i18n.js"></script>
+  <script type="module" src="../js/welcome.js"></script>
+
+</body>
+</html>

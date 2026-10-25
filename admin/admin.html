@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — Mateen Online Store</title>
+
+  <link rel="icon" href="../assets/favicon.ico" />
+
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="css/admin-auth.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body class="admin-body">
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 🔐 LOGIN SCREEN                          -->
+  <!-- ═══════════════════════════════════════ -->
+  <section id="adminLoginScreen" class="admin-login-screen">
+    <div class="admin-login-card">
+      <div class="admin-login-header">
+        <div class="admin-logo">🛡️</div>
+        <h1>Admin Panel</h1>
+        <p>Mateen Online Store — Restricted Access</p>
+      </div>
+
+      <form id="adminLoginForm" class="admin-login-form" autocomplete="off">
+        <div class="form-group">
+          <label for="adminEmail">Email</label>
+          <input
+            type="email"
+            id="adminEmail"
+            placeholder="admin@mateenstore.com"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="adminPassword">Password</label>
+          <input
+            type="password"
+            id="adminPassword"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+
+        <button type="submit" id="adminLoginBtn" class="btn-primary">
+          <span class="btn-text">Login</span>
+          <span class="btn-loader hidden">⏳</span>
+        </button>
+
+        <p id="adminLoginError" class="error-message hidden"></p>
+      </form>
+
+      <div class="admin-login-footer">
+        <p>🔒 Only authorized admins can access this panel</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 🏠 ADMIN DASHBOARD                       -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="adminDashboard" class="admin-dashboard hidden">
+
+    <!-- ─── SIDEBAR ─── -->
+    <aside class="admin-sidebar" id="adminSidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo">🛡️</div>
+        <div>
+          <h2>Mateen Admin</h2>
+          <p>Control Panel</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-section="dashboard">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label" data-i18n="admin_nav_dashboard">Dashboard</span>
+        </a>
+        <a href="#" class="nav-item" data-section="products">
+          <span class="nav-icon">📦</span>
+          <span class="nav-label" data-i18n="admin_nav_products">Products</span>
+        </a>
+        <a href="#" class="nav-item" data-section="categories">
+          <span class="nav-icon">🗂️</span>
+          <span class="nav-label" data-i18n="admin_nav_categories">Categories</span>
+        </a>
+        <a href="#" class="nav-item" data-section="orders">
+          <span class="nav-icon">🧾</span>
+          <span class="nav-label" data-i18n="admin_nav_orders">Orders</span>
+        </a>
+        <a href="#" class="nav-item" data-section="users">
+          <span class="nav-icon">👥</span>
+          <span class="nav-label" data-i18n="admin_nav_users">Users</span>
+        </a>
+        <a href="#" class="nav-item" data-section="coupons">
+          <span class="nav-icon">🎟️</span>
+          <span class="nav-label" data-i18n="admin_nav_coupons">Coupons</span>
+        </a>
+        <a href="#" class="nav-item" data-section="reviews">
+          <span class="nav-icon">⭐</span>
+          <span class="nav-label" data-i18n="admin_nav_reviews">Reviews</span>
+        </a>
+        <a href="#" class="nav-item" data-section="settings">
+          <span class="nav-icon">⚙️</span>
+          <span class="nav-label" data-i18n="admin_nav_settings">Settings</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="#" id="adminLogoutBtn" class="logout-btn">
+          <span>🚪</span>
+          <span data-i18n="logout">Logout</span>
+        </a>
+      </div>
+    </aside>
+
+    <!-- ─── MAIN CONTENT ─── -->
+    <main class="admin-main">
+
+      <!-- TOPBAR -->
+      <header class="admin-topbar">
+        <button id="sidebarToggle" class="sidebar-toggle">☰</button>
+
+        <div class="topbar-title">
+          <h1 id="adminPageTitle" data-i18n="admin_nav_dashboard">Dashboard</h1>
+        </div>
+
+        <div class="topbar-actions">
+          <button id="adminLangToggle" class="lang-btn" title="Language">
+            🌐 <span id="adminLangLabel">EN</span>
+          </button>
+
+          <div class="admin-profile">
+            <img id="adminAvatar" src="../assets/avatar.png" alt="Admin" />
+            <div class="admin-profile-info">
+              <span id="adminName">Admin</span>
+              <small id="adminEmailDisplay">admin@mateenstore.com</small>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- CONTENT AREA -->
+      <div class="admin-content" id="adminContent">
+
+        <!-- ─── SECTION: DASHBOARD ─── -->
+        <section class="admin-section active" id="section-dashboard">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon">📦</div>
+              <div class="stat-info">
+                <p data-i18n="admin_stat_products">Total Products</p>
+                <h3 id="statProducts">0</h3>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">🧾</div>
+              <div class="stat-info">
+                <p data-i18n="admin_stat_orders">Total Orders</p>
+                <h3 id="statOrders">0</h3>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">👥</div>
+              <div class="stat-info">
+                <p data-i18n="admin_stat_users">Total Users</p>
+                <h3 id="statUsers">0</h3>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">💰</div>
+              <div class="stat-info">
+                <p data-i18n="admin_stat_revenue">Revenue (PKR)</p>
+                <h3 id="statRevenue">0</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <div class="dash-panel">
+              <h3 data-i18n="admin_recent_orders">Recent Orders</h3>
+              <div id="recentOrdersList" class="list-container">
+                <p class="empty-msg" data-i18n="loading">Loading...</p>
+              </div>
+            </div>
+
+            <div class="dash-panel">
+              <h3 data-i18n="admin_low_stock">Low Stock Products</h3>
+              <div id="lowStockList" class="list-container">
+                <p class="empty-msg" data-i18n="loading">Loading...</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ─── SECTION: PRODUCTS ─── -->
+        <section class="admin-section" id="section-products">
+          <div class="section-header">
+            <h2 data-i18n="admin_products_title">Manage Products</h2>
+            <button class="btn-primary" id="addProductBtn">
+              ➕ <span data-i18n="admin_add_product">Add Product</span>
+            </button>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="admin-table" id="productsTable">
+              <thead>
+                <tr>
+                  <th data-i18n="admin_th_image">Image</th>
+                  <th data-i18n="admin_th_name">Name</th>
+                  <th data-i18n="admin_th_category">Category</th>
+                  <th data-i18n="admin_th_price">Price</th>
+                  <th data-i18n="admin_th_stock">Stock</th>
+                  <th data-i18n="admin_th_status">Status</th>
+                  <th data-i18n="admin_th_actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="productsTableBody">
+                <tr><td colspan="7" class="empty-msg" data-i18n="loading">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ─── SECTION: CATEGORIES ─── -->
+        <section class="admin-section" id="section-categories">
+          <div class="section-header">
+            <h2 data-i18n="admin_categories_title">Manage Categories</h2>
+            <button class="btn-primary" id="addCategoryBtn">
+              ➕ <span data-i18n="admin_add_category">Add Category</span>
+            </button>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="admin-table" id="categoriesTable">
+              <thead>
+                <tr>
+                  <th data-i18n="admin_th_image">Image</th>
+                  <th data-i18n="admin_th_name">Name</th>
+                  <th data-i18n="admin_th_slug">Slug</th>
+                  <th data-i18n="admin_th_actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="categoriesTableBody">
+                <tr><td colspan="4" class="empty-msg" data-i18n="loading">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ─── SECTION: ORDERS ─── -->
+        <section class="admin-section" id="section-orders">
+          <div class="section-header">
+            <h2 data-i18n="admin_orders_title">Manage Orders</h2>
+            <div class="filter-group">
+              <select id="orderStatusFilter">
+                <option value="all" data-i18n="all">All</option>
+                <option value="pending" data-i18n="status_pending">Pending</option>
+                <option value="confirmed" data-i18n="status_confirmed">Confirmed</option>
+                <option value="shipped" data-i18n="status_shipped">Shipped</option>
+                <option value="delivered" data-i18n="status_delivered">Delivered</option>
+                <option value="cancelled" data-i18n="status_cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="admin-table" id="ordersTable">
+              <thead>
+                <tr>
+                  <th data-i18n="admin_th_order_no">Order #</th>
+                  <th data-i18n="admin_th_customer">Customer</th>
+                  <th data-i18n="admin_th_total">Total</th>
+                  <th data-i18n="admin_th_date">Date</th>
+                  <th data-i18n="admin_th_status">Status</th>
+                  <th data-i18n="admin_th_actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody">
+                <tr><td colspan="6" class="empty-msg" data-i18n="loading">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ─── SECTION: USERS ─── -->
+        <section class="admin-section" id="section-users">
+          <div class="section-header">
+            <h2 data-i18n="admin_users_title">Manage Users</h2>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="admin-table" id="usersTable">
+              <thead>
+                <tr>
+                  <th data-i18n="admin_th_name">Name</th>
+                  <th data-i18n="email">Email</th>
+                  <th data-i18n="phone">Phone</th>
+                  <th data-i18n="admin_th_joined">Joined</th>
+                  <th data-i18n="admin_th_actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="usersTableBody">
+                <tr><td colspan="5" class="empty-msg" data-i18n="loading">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ─── SECTION: COUPONS ─── -->
+        <section class="admin-section" id="section-coupons">
+          <div class="section-header">
+            <h2 data-i18n="admin_coupons_title">Manage Coupons</h2>
+            <button class="btn-primary" id="addCouponBtn">
+              ➕ <span data-i18n="admin_add_coupon">Add Coupon</span>
+            </button>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="admin-table" id="couponsTable">
+              <thead>
+                <tr>
+                  <th data-i18n="coupon_code">Code</th>
+                  <th data-i18n="discount">Discount</th>
+                  <th data-i18n="admin_th_expiry">Expiry</th>
+                  <th data-i18n="admin_th_status">Status</th>
+                  <th data-i18n="admin_th_actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="couponsTableBody">
+                <tr><td colspan="5" class="empty-msg" data-i18n="loading">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ─── SECTION: REVIEWS ─── -->
+        <section class="admin-section" id="section-reviews">
+          <div class="section-header">
+            <h2 data-i18n="admin_reviews_title">Manage Reviews</h2>
+          </div>
+
+          <div class="table-wrapper">
+            <table class="admin-table" id="reviewsTable">
+              <thead>
+                <tr>
+                  <th data-i18n="product">Product</th>
+                  <th data-i18n="admin_th_user">User</th>
+                  <th data-i18n="admin_th_rating">Rating</th>
+                  <th data-i18n="admin_th_comment">Comment</th>
+                  <th data-i18n="admin_th_actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="reviewsTableBody">
+                <tr><td colspan="5" class="empty-msg" data-i18n="loading">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- ─── SECTION: SETTINGS ─── -->
+        <section class="admin-section" id="section-settings">
+          <div class="section-header">
+            <h2 data-i18n="admin_settings_title">Store Settings</h2>
+          </div>
+
+          <form class="settings-form" id="settingsForm">
+            <div class="form-group">
+              <label data-i18n="admin_setting_store_name">Store Name</label>
+              <input type="text" id="settingStoreName" value="Mateen Online Store" />
+            </div>
+
+            <div class="form-group">
+              <label data-i18n="admin_setting_contact_email">Contact Email</label>
+              <input type="email" id="settingEmail" value="support@mateenstore.com" />
+            </div>
+
+            <div class="form-group">
+              <label data-i18n="admin_setting_contact_phone">Contact Phone</label>
+              <input type="text" id="settingPhone" value="+92 300 1234567" />
+            </div>
+
+            <div class="form-group">
+              <label data-i18n="admin_setting_shipping_fee">Shipping Fee (PKR)</label>
+              <input type="number" id="settingShippingFee" value="200" />
+            </div>
+
+            <div class="form-group">
+              <label data-i18n="admin_setting_free_shipping_min">Free Shipping Above (PKR)</label>
+              <input type="number" id="settingFreeShipping" value="5000" />
+            </div>
+
+            <button type="submit" class="btn-primary">
+              💾 <span data-i18n="save_changes">Save Changes</span>
+            </button>
+          </form>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 📦 PRODUCT MODAL                         -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="productModal" class="admin-modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="productModalTitle" data-i18n="admin_add_product">Add Product</h3>
+        <button class="modal-close" data-close="productModal">✖</button>
+      </div>
+
+      <form id="productForm" class="modal-form">
+        <input type="hidden" id="productId" />
+
+        <div class="form-group">
+          <label data-i18n="admin_th_name">Name</label>
+          <input type="text" id="productName" required />
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="admin_th_category">Category</label>
+          <select id="productCategory" required></select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="price">Price (PKR)</label>
+            <input type="number" id="productPrice" required />
+          </div>
+          <div class="form-group">
+            <label data-i18n="admin_th_stock">Stock</label>
+            <input type="number" id="productStock" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="description">Description</label>
+          <textarea id="productDescription" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="admin_th_image">Image URL</label>
+          <input type="url" id="productImage" placeholder="https://..." />
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" data-close="productModal" data-i18n="cancel">Cancel</button>
+          <button type="submit" class="btn-primary" data-i18n="save">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 🗂️ CATEGORY MODAL                        -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="categoryModal" class="admin-modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 data-i18n="admin_add_category">Add Category</h3>
+        <button class="modal-close" data-close="categoryModal">✖</button>
+      </div>
+
+      <form id="categoryForm" class="modal-form">
+        <input type="hidden" id="categoryId" />
+
+        <div class="form-group">
+          <label data-i18n="admin_th_name">Name</label>
+          <input type="text" id="categoryName" required />
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="admin_th_image">Image URL</label>
+          <input type="url" id="categoryImage" placeholder="https://..." />
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" data-close="categoryModal" data-i18n="cancel">Cancel</button>
+          <button type="submit" class="btn-primary" data-i18n="save">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 🎟️ COUPON MODAL                          -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="couponModal" class="admin-modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 data-i18n="admin_add_coupon">Add Coupon</h3>
+        <button class="modal-close" data-close="couponModal">✖</button>
+      </div>
+
+      <form id="couponForm" class="modal-form">
+        <input type="hidden" id="couponId" />
+
+        <div class="form-group">
+          <label data-i18n="coupon_code">Code</label>
+          <input type="text" id="couponCode" required />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="discount">Discount (%)</label>
+            <input type="number" id="couponDiscount" min="1" max="100" required />
+          </div>
+          <div class="form-group">
+            <label data-i18n="admin_th_expiry">Expiry</label>
+            <input type="date" id="couponExpiry" required />
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-secondary" data-close="couponModal" data-i18n="cancel">Cancel</button>
+          <button type="submit" class="btn-primary" data-i18n="save">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 🧾 ORDER DETAILS MODAL                   -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="orderModal" class="admin-modal hidden">
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h3 data-i18n="order_details">Order Details</h3>
+        <button class="modal-close" data-close="orderModal">✖</button>
+      </div>
+
+      <div id="orderDetailsContent" class="order-details-body"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 🍞 TOAST NOTIFICATIONS                   -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 📜 SCRIPTS                               -->
+  <!-- ═══════════════════════════════════════ -->
+  <script type="module" src="../js/firebase-config.js"></script>
+  <script type="module" src="../js/i18n.js"></script>
+  <script type="module" src="js/admin-auth.js"></script>
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>

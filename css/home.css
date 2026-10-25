@@ -1,0 +1,608 @@
+/* =========================================
+   BASE & CONTAINER FIX
+   ========================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* یہ کلاس سب سے اہم ہے، اس کے بغیر لے آؤٹ 50% میں سمٹ جائے گا */
+.container {
+  width: 100%;
+  max-width: 1200px; /* آپ اپنی مرضی سے زیادہ سے زیادہ چوڑائی تبدیل کر سکتے ہیں */
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9fafb;
+  color: #333;
+  overflow-x: hidden; /* تاکہ کوئی چیز دائیں طرف سے اسکرین سے باہر نہ نکلے */
+}
+
+/* =========================================
+   HOME PAGE STYLING
+   ========================================= */
+
+/* ---------- Header ---------- */
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #ffffff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  padding: 14px 0;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--primary-color, #0d6efd);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.logo i {
+  font-size: 24px;
+}
+
+/* ---------- Search Bar ---------- */
+.search-bar {
+  flex: 1;
+  max-width: 500px;
+  display: flex;
+  background: #f3f4f6;
+  border-radius: 30px;
+  padding: 6px 6px 6px 16px;
+  align-items: center;
+}
+
+.search-bar input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  padding: 8px;
+  width: 100%;
+}
+
+.search-bar button {
+  background: var(--primary-color, #0d6efd);
+  color: #fff;
+  border: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.2s;
+  flex-shrink: 0;
+}
+
+.search-bar button:hover {
+  background: #0b5ed7;
+}
+
+/* ---------- Header Actions ---------- */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-btn {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s;
+}
+
+.icon-btn:hover {
+  background: var(--primary-color, #0d6efd);
+  color: #fff;
+}
+
+.cart-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #dc3545;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* =========================================
+   🌐 LANGUAGE TOGGLE BUTTON
+   ========================================= */
+.lang-btn {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--primary-color, #0d6efd);
+  background: #f3f4f6;
+  min-width: 56px;
+  padding: 0 12px;
+  width: auto;
+  border-radius: 20px;
+}
+
+.lang-btn:hover {
+  background: var(--primary-color, #0d6efd);
+  color: #fff;
+}
+
+.lang-btn span {
+  font-family: 'Noto Nastaliq Urdu', 'Segoe UI', sans-serif;
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* ---------- Banner ---------- */
+.banner-section {
+  padding: 24px 0;
+}
+
+.banner-slider {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.banner-slide {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  padding: 30px;
+}
+
+.banner-slide.active {
+  display: flex;
+}
+
+.banner-content {
+  max-width: 600px;
+  width: 100%;
+}
+
+.banner-content h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.banner-content p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: #fff;
+  color: var(--primary-color, #0d6efd);
+  padding: 12px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.banner-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.banner-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.banner-dots span.active {
+  background: var(--primary-color, #0d6efd);
+  width: 24px;
+  border-radius: 10px;
+}
+
+/* ---------- Section Titles ---------- */
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: #222;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.view-all {
+  color: var(--primary-color, #0d6efd);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.view-all i {
+  transition: 0.2s;
+}
+
+.view-all:hover i {
+  transform: translateX(4px);
+}
+
+/* ---------- Categories ---------- */
+.categories-section {
+  padding: 30px 0;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px;
+}
+
+.category-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 16px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.2s;
+  text-decoration: none;
+  color: #222;
+}
+
+.category-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--primary-color, #0d6efd);
+  box-shadow: 0 8px 20px rgba(13, 110, 253, 0.1);
+}
+
+.category-card img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 8px;
+}
+
+.category-card span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* ---------- Products Grid ---------- */
+.featured-section {
+  padding: 30px 0;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 18px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #eee;
+  transition: 0.2s;
+  cursor: pointer;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.product-info {
+  padding: 12px;
+}
+
+.product-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #222;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-color, #0d6efd);
+}
+
+.product-price del {
+  color: #999;
+  font-size: 13px;
+  margin-right: 6px;
+  font-weight: 400;
+}
+
+.product-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #dc3545;
+  color: #fff;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  z-index: 2;
+}
+
+/* ---------- Footer ---------- */
+.main-footer {
+  background: #1a1a2e;
+  color: #ccc;
+  margin-top: 40px;
+  padding-top: 40px;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  padding-bottom: 30px;
+}
+
+.footer-col h4 {
+  color: #fff;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.footer-col p,
+.footer-col li {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-col a {
+  color: #ccc;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.footer-col a:hover {
+  color: var(--primary-color, #0d6efd);
+}
+
+.social-icons {
+  display: flex;
+  gap: 12px;
+  font-size: 20px;
+}
+
+.social-icons a {
+  color: #ccc;
+}
+
+.social-icons a:hover {
+  color: #fff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 16px;
+  border-top: 1px solid #333;
+  font-size: 13px;
+}
+
+/* ---------- Loading ---------- */
+.loading-text {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #888;
+  padding: 20px;
+}
+
+/* =========================================
+   🌐 RTL SUPPORT (اردو کے لیے)
+   ========================================= */
+
+body.lang-ur {
+  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Segoe UI', sans-serif;
+}
+
+html[dir="rtl"] .header-inner {
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .search-bar {
+  padding: 6px 16px 6px 6px;
+}
+
+html[dir="rtl"] .view-all i {
+  transform: scaleX(-1);
+}
+
+html[dir="rtl"] .view-all:hover i {
+  transform: scaleX(-1) translateX(4px);
+}
+
+html[dir="rtl"] .cart-count {
+  right: auto;
+  left: -4px;
+}
+
+html[dir="rtl"] .product-badge {
+  left: auto;
+  right: 10px;
+}
+
+html[dir="rtl"] .product-price del {
+  margin-right: 0;
+  margin-left: 6px;
+}
+
+html[dir="rtl"] .banner-content h2,
+html[dir="rtl"] .section-title,
+html[dir="rtl"] .product-title,
+html[dir="rtl"] .footer-col h4 {
+  line-height: 1.6;
+}
+
+html[dir="rtl"] .banner-content p,
+html[dir="rtl"] .footer-col p,
+html[dir="rtl"] .footer-col li {
+  line-height: 2;
+}
+
+html[dir="rtl"] .btn-primary {
+  font-family: 'Noto Nastaliq Urdu', 'Segoe UI', sans-serif;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+html[dir="rtl"] .lang-btn span {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* =========================================
+   📱 RESPONSIVE DESIGN (Mobile/Tablet Fix)
+   ========================================= */
+
+/* ٹیبلٹ اور موبائل کے لیے */
+@media (max-width: 768px) {
+  /* ہیڈر کو اوپر نیچے سیٹ کریں */
+  .header-inner {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .logo {
+    order: 1;
+  }
+
+  .header-actions {
+    order: 2;
+  }
+
+  .search-bar {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 5px;
+  }
+
+  /* بینر کی اونچائی کم کریں تاکہ موبائل پر بہت لمبا نہ لگے */
+  .banner-slider {
+    height: 240px;
+  }
+
+  .banner-content h2 {
+    font-size: 24px;
+  }
+
+  .banner-content p {
+    font-size: 14px;
+  }
+
+  /* گریڈز کو موبائل پر 2 کالم میں لائیں */
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  /* سیکشن ہیڈر کے ٹائٹل چھوٹے کریں */
+  .section-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  /* فوٹر ایک کالم میں */
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align: center;
+  }
+
+  .social-icons {
+    justify-content: center;
+  }
+}
+
+/* چھوٹے موبائل فونز کے لیے */
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr; /* ایک کالم */
+  }
+  
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 کالم */
+  }
+}

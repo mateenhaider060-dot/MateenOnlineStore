@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login — Mateen Online Store</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="auth-body">
+
+  <button class="lang-btn-floating" id="langToggle" data-i18n-title="language" title="Language">
+    <i class="fa-solid fa-globe"></i>
+    <span id="langLabel">اردو</span>
+  </button>
+
+  <div class="auth-wrapper">
+
+    <div class="auth-header">
+      <a href="welcome.html" class="auth-back">←</a>
+      <div class="auth-logo">
+        <span class="auth-logo-text">M</span>
+      </div>
+      <h1 class="auth-title" data-i18n="welcome_back">Welcome Back</h1>
+      <p class="auth-subtitle" data-i18n="login_subtitle">Login to your account</p>
+    </div>
+
+    <form id="loginForm" class="auth-form" novalidate>
+
+      <div class="form-group">
+        <label for="email" class="form-label" data-i18n="email">Email</label>
+        <input type="email" id="email" class="form-input"
+               data-i18n-placeholder="email_placeholder"
+               placeholder="example@email.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label" data-i18n="password">Password</label>
+        <div class="password-wrapper">
+          <input type="password" id="password" class="form-input"
+                 data-i18n-placeholder="password_placeholder"
+                 placeholder="Enter your password" required>
+          <button type="button" class="password-toggle" data-target="password">👁️</button>
+        </div>
+      </div>
+
+      <div class="form-group flex-between">
+        <label class="checkbox-label">
+          <input type="checkbox" id="remember">
+          <span data-i18n="remember_me">Remember me</span>
+        </label>
+        <a href="#" class="link forgot-link" id="forgotPassword" data-i18n="forgot_password">
+          Forgot password?
+        </a>
+      </div>
+
+      <button type="submit" id="loginBtn" class="btn btn-primary btn-block btn-lg"
+              data-i18n="login">
+        Login
+      </button>
+
+    </form>
+
+    <p class="auth-footer">
+      <span data-i18n="dont_have_account">Don't have an account?</span>
+      <a href="signup.html" class="link" data-i18n="signup">Sign Up</a>
+    </p>
+
+  </div>
+
+  <script type="module" src="../js/i18n.js"></script>
+  <script type="module" src="../js/auth.js"></script>
+</body>
+</html>

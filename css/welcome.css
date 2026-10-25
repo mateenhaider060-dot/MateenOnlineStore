@@ -1,0 +1,300 @@
+/* =========================================
+   WELCOME PAGE STYLING
+   ========================================= */
+
+/* ---------- Page Base ---------- */
+.welcome-body {
+  margin: 0;
+  padding: 0;
+  background: #f5f7fa;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  position: relative;
+}
+
+/* ---------- Language Button (Floating) ---------- */
+.lang-btn-floating {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 999;
+  background: #ffffff;
+  color: var(--primary-color, #0d6efd);
+  border: 1px solid #e0e0e0;
+  border-radius: 30px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: 0.2s;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.lang-btn-floating:hover {
+  background: var(--primary-color, #0d6efd);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.lang-btn-floating i {
+  font-size: 14px;
+}
+
+.lang-btn-floating span {
+  font-family: 'Noto Nastaliq Urdu', 'Segoe UI', sans-serif;
+}
+
+/* ---------- Wrapper ---------- */
+.welcome-wrapper {
+  width: 100%;
+  max-width: 460px;
+  margin: 20px;
+  background: #ffffff;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  animation: welcomeFadeIn 0.5s ease;
+}
+
+@keyframes welcomeFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Hero Section ---------- */
+.welcome-hero {
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+  color: #ffffff;
+  padding: 50px 30px 40px;
+  text-align: center;
+  position: relative;
+}
+
+.welcome-icon {
+  width: 90px;
+  height: 90px;
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+  font-size: 46px;
+  animation: iconPulse 2s infinite;
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 12px rgba(255, 255, 255, 0);
+  }
+}
+
+.welcome-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  letter-spacing: 0.3px;
+  line-height: 1.5;
+}
+
+.welcome-tagline {
+  font-size: 14px;
+  margin: 0;
+  opacity: 0.92;
+  line-height: 1.8;
+}
+
+/* ---------- Content Section ---------- */
+.welcome-content {
+  padding: 30px 26px 26px;
+}
+
+.welcome-heading {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: #222;
+  line-height: 1.5;
+}
+
+.welcome-text {
+  font-size: 14.5px;
+  color: #666;
+  line-height: 1.9;
+  margin: 0 0 22px;
+}
+
+/* ---------- Features ---------- */
+.welcome-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 26px;
+  padding: 16px;
+  background: #f8f9fc;
+  border-radius: 14px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14.5px;
+  color: #333;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  background: #e7f3ff;
+  border-radius: 50%;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* ---------- Buttons ---------- */
+.welcome-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* ---------- Footer ---------- */
+.welcome-footer {
+  font-size: 12.5px;
+  color: #999;
+  text-align: center;
+  line-height: 1.9;
+  margin: 0;
+}
+
+.welcome-footer .link {
+  color: var(--primary-color, #0d6efd);
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.welcome-footer .link:hover {
+  text-decoration: underline;
+}
+
+/* =========================================
+   🌐 RTL SUPPORT (اردو کے لیے)
+   ========================================= */
+
+/* اردو فونٹ */
+body.lang-ur {
+  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Segoe UI', sans-serif;
+}
+
+/* Language button اردو میں بائیں طرف */
+html[dir="rtl"] .lang-btn-floating {
+  right: auto;
+  left: 16px;
+}
+
+html[dir="rtl"] .lang-btn-floating span {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Feature item میں icon دائیں طرف */
+html[dir="rtl"] .feature-item {
+  flex-direction: row-reverse;
+}
+
+/* اردو میں line-height تھوڑی بڑھائیں */
+html[dir="rtl"] .welcome-title,
+html[dir="rtl"] .welcome-heading {
+  line-height: 1.9;
+}
+
+html[dir="rtl"] .welcome-text,
+html[dir="rtl"] .feature-item,
+html[dir="rtl"] .welcome-tagline,
+html[dir="rtl"] .welcome-footer {
+  line-height: 2.2;
+}
+
+/* اردو میں buttons کی اونچائی */
+html[dir="rtl"] .btn {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  font-family: 'Noto Nastaliq Urdu', 'Segoe UI', sans-serif;
+}
+
+/* =========================================
+   📱 RESPONSIVE
+   ========================================= */
+@media (max-width: 480px) {
+  .welcome-wrapper {
+    margin: 12px;
+    border-radius: 18px;
+  }
+
+  .welcome-hero {
+    padding: 40px 20px 30px;
+  }
+
+  .welcome-icon {
+    width: 76px;
+    height: 76px;
+    font-size: 38px;
+  }
+
+  .welcome-title {
+    font-size: 22px;
+  }
+
+  .welcome-content {
+    padding: 24px 20px 22px;
+  }
+
+  .welcome-heading {
+    font-size: 19px;
+  }
+
+  .welcome-text {
+    font-size: 13.5px;
+  }
+
+  .feature-item {
+    font-size: 13.5px;
+  }
+
+  .lang-btn-floating {
+    top: 12px;
+    right: 12px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  html[dir="rtl"] .lang-btn-floating {
+    right: auto;
+    left: 12px;
+  }
+}

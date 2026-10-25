@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout</title>
+
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/checkout.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <header class="main-header">
+    <div class="container header-inner">
+      <a href="home.html" class="logo">
+        <i class="fa-solid fa-store"></i>
+        <span data-i18n="brand">Mateen Online Store</span>
+      </a>
+
+      <div class="header-actions">
+        <button class="icon-btn lang-btn" id="langToggle" title="Language">
+          <span id="langLabel">اردو</span>
+        </button>
+        <a href="profile.html" class="icon-btn" title="Profile">
+          <i class="fa-regular fa-user"></i>
+        </a>
+        <a href="cart.html" class="icon-btn cart-btn" title="Cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-title-section">
+    <div class="container">
+      <h1 class="page-title" data-i18n="checkout">Checkout</h1>
+      <p class="page-subtitle" data-i18n="checkout_subtitle">
+        Enter your details to complete your order
+      </p>
+    </div>
+  </section>
+
+  <section class="checkout-section">
+    <div class="container">
+
+      <div class="empty-state hidden" id="emptyCheckout">
+        <div class="empty-state-icon">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </div>
+        <h3 data-i18n="empty_cart">Your cart is empty</h3>
+        <p data-i18n="empty_cart_desc">Looks like you haven't added anything to your cart yet.</p>
+        <a href="products.html" class="btn btn-primary" data-i18n="continue_shopping">
+          Continue Shopping
+        </a>
+      </div>
+
+      <div class="checkout-layout hidden" id="checkoutLayout">
+
+        <div class="checkout-form-wrap">
+
+          <form id="checkoutForm" novalidate>
+
+            <div class="form-section">
+              <h3 class="form-section-title">
+                <i class="fa-solid fa-truck"></i>
+                <span data-i18n="shipping_info">Shipping Information</span>
+              </h3>
+
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" data-i18n="name">Full Name</label>
+                  <input type="text" id="fullName" class="form-input"
+                         data-i18n-placeholder="name_placeholder"
+                         placeholder="Enter your full name" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" data-i18n="phone">Phone Number</label>
+                  <input type="tel" id="phone" class="form-input"
+                         data-i18n-placeholder="phone_placeholder"
+                         placeholder="03001234567" required />
+                </div>
+
+                <div class="form-group full-width">
+                  <label class="form-label" data-i18n="email">Email</label>
+                  <input type="email" id="email" class="form-input"
+                         data-i18n-placeholder="email_placeholder"
+                         placeholder="example@email.com" required />
+                </div>
+
+                <div class="form-group full-width">
+                  <label class="form-label" data-i18n="address">Address</label>
+                  <textarea id="address" class="form-textarea" rows="3"
+                            data-i18n-placeholder="address_placeholder"
+                            placeholder="House #, Street, Area, City"
+                            required></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" data-i18n="city">City</label>
+                  <input type="text" id="city" class="form-input"
+                         data-i18n-placeholder="city_placeholder"
+                         placeholder="Karachi" required />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" data-i18n="postal_code">Postal Code</label>
+                  <input type="text" id="postalCode" class="form-input"
+                         data-i18n-placeholder="postal_placeholder"
+                         placeholder="75500" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3 class="form-section-title">
+                <i class="fa-solid fa-credit-card"></i>
+                <span data-i18n="payment_method">Payment Method</span>
+              </h3>
+
+              <div class="payment-options">
+                <label class="payment-option">
+                  <input type="radio" name="payment" value="cod" checked />
+                  <div class="payment-option-body">
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                    <div>
+                      <strong data-i18n="cash_on_delivery">Cash on Delivery</strong>
+                      <p data-i18n="cod_desc">Pay when you receive your order</p>
+                    </div>
+                  </div>
+                </label>
+
+                <label class="payment-option">
+                  <input type="radio" name="payment" value="bank" />
+                  <div class="payment-option-body">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <div>
+                      <strong data-i18n="bank_transfer">Bank Transfer</strong>
+                      <p data-i18n="bank_desc">Transfer to our bank account</p>
+                    </div>
+                  </div>
+                </label>
+              </div>
+
+              <div class="bank-details hidden" id="bankDetails">
+                <p><strong data-i18n="bank_name">Bank:</strong> Meezan Bank</p>
+                <p><strong data-i18n="account_title">Account Title:</strong> Mateen Online Store</p>
+                <p><strong data-i18n="account_number">Account Number:</strong> 01234567890123</p>
+                <p><strong data-i18n="iban">IBAN:</strong> PK00MEZN0000000123456789</p>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3 class="form-section-title">
+                <i class="fa-solid fa-note-sticky"></i>
+                <span data-i18n="order_notes">Order Notes (Optional)</span>
+              </h3>
+              <textarea id="orderNotes" class="form-textarea" rows="2"
+                        data-i18n-placeholder="notes_placeholder"
+                        placeholder="Any special instructions..."></textarea>
+            </div>
+
+          </form>
+        </div>
+
+        <aside class="checkout-summary">
+          <h3 class="summary-title" data-i18n="order_summary">Order Summary</h3>
+
+          <div class="summary-items" id="summaryItems"></div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-row">
+            <span data-i18n="subtotal">Subtotal</span>
+            <span id="summarySubtotal">Rs 0</span>
+          </div>
+
+          <div class="summary-row">
+            <span data-i18n="shipping">Shipping</span>
+            <span id="summaryShipping">Rs 0</span>
+          </div>
+
+          <div class="summary-row discount-row hidden" id="discountRow">
+            <span data-i18n="discount">Discount</span>
+            <span id="summaryDiscount">- Rs 0</span>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-row total-row">
+            <span data-i18n="grand_total">Grand Total</span>
+            <span id="summaryTotal">Rs 0</span>
+          </div>
+
+          <button class="btn btn-primary btn-block btn-lg" id="placeOrderBtn">
+            <i class="fa-solid fa-check"></i>
+            <span data-i18n="place_order">Place Order</span>
+          </button>
+
+          <a href="cart.html" class="btn btn-ghost btn-block" data-i18n="back_to_cart">
+            Back to Cart
+          </a>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="main-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h4 data-i18n="brand">Mateen Online Store</h4>
+        <p data-i18n="footer_desc">Best products at best prices — delivery all over Pakistan.</p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="links">Links</h4>
+        <ul>
+          <li><a href="about.html" data-i18n="about_us">About Us</a></li>
+          <li><a href="contact.html" data-i18n="contact">Contact</a></li>
+          <li><a href="faq.html" data-i18n="faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="policies">Policies</h4>
+        <ul>
+          <li><a href="terms.html" data-i18n="terms">Terms & Conditions</a></li>
+          <li><a href="privacy.html" data-i18n="privacy">Privacy Policy</a></li>
+          <li><a href="return-policy.html" data-i18n="return_policy">Return Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="follow_us">Follow Us</h4>
+        <div class="social-icons">
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-i18n="copyright">© 2026 Mateen Online Store. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="modal-overlay hidden" id="successModal">
+    <div class="modal-box">
+      <div class="modal-icon success">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <h2 data-i18n="order_success">Order placed successfully!</h2>
+      <p class="modal-order-number">
+        <span data-i18n="order_number">Order Number</span>:
+        <strong id="modalOrderNumber">—</strong>
+      </p>
+      <p data-i18n="order_success_desc">
+        Thank you for your order. You will receive a confirmation soon.
+      </p>
+      <div class="modal-actions">
+        <a href="orders.html" class="btn btn-primary" data-i18n="view_orders">
+          View My Orders
+        </a>
+        <a href="home.html" class="btn btn-ghost" data-i18n="go_home">
+          Go to Home
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="../js/firebase-config.js"></script>
+  <script type="module" src="../js/global.js"></script>
+  <script type="module" src="../js/i18n.js"></script>
+  <script type="module" src="../js/auth-guard.js"></script>
+  <script type="module" src="../js/checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up — Mateen Online Store</title>
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="auth-body">
+
+  <button class="lang-btn-floating" id="langToggle" data-i18n-title="language" title="Language">
+    <i class="fa-solid fa-globe"></i>
+    <span id="langLabel">اردو</span>
+  </button>
+
+  <div class="auth-wrapper">
+
+    <div class="auth-header">
+      <a href="welcome.html" class="auth-back">←</a>
+      <div class="auth-logo">
+        <span class="auth-logo-text">M</span>
+      </div>
+      <h1 class="auth-title" data-i18n="signup_heading">Create Account</h1>
+      <p class="auth-subtitle" data-i18n="signup_subtitle">Create your new account</p>
+    </div>
+
+    <form id="signupForm" class="auth-form" novalidate>
+
+      <div class="form-group">
+        <label for="name" class="form-label" data-i18n="name">Full Name</label>
+        <input type="text" id="name" class="form-input"
+               data-i18n-placeholder="name_placeholder"
+               placeholder="Enter your full name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="form-label" data-i18n="email">Email</label>
+        <input type="email" id="email" class="form-input"
+               data-i18n-placeholder="email_placeholder"
+               placeholder="example@email.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone" class="form-label" data-i18n="phone">Phone Number</label>
+        <input type="tel" id="phone" class="form-input"
+               data-i18n-placeholder="phone_placeholder"
+               placeholder="03001234567" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label" data-i18n="password">Password</label>
+        <div class="password-wrapper">
+          <input type="password" id="password" class="form-input"
+                 data-i18n-placeholder="password_placeholder"
+                 placeholder="Enter your password" required>
+          <button type="button" class="password-toggle" data-target="password">👁️</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword" class="form-label" data-i18n="confirm_password">
+          Confirm Password
+        </label>
+        <div class="password-wrapper">
+          <input type="password" id="confirmPassword" class="form-input"
+                 data-i18n-placeholder="password_placeholder"
+                 placeholder="Enter your password" required>
+          <button type="button" class="password-toggle" data-target="confirmPassword">👁️</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="checkbox-label">
+          <input type="checkbox" id="terms">
+          <span data-i18n="agree_to_terms">
+            I agree to the Terms &amp; Privacy Policy
+          </span>
+        </label>
+      </div>
+
+      <button type="submit" id="signupBtn" class="btn btn-primary btn-block btn-lg"
+              data-i18n="create_account">
+        Create Account
+      </button>
+
+    </form>
+
+    <p class="auth-footer">
+      <span data-i18n="already_account">Already have an account?</span>
+      <a href="login.html" class="link" data-i18n="login">Login</a>
+    </p>
+
+  </div>
+
+  <script type="module" src="../js/i18n.js"></script>
+  <script type="module" src="../js/auth.js"></script>
+</body>
+</html>

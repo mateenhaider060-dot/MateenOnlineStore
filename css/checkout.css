@@ -1,0 +1,346 @@
+/* =========================================
+   CHECKOUT PAGE STYLING
+   ========================================= */
+
+/* ---------- Page Title ---------- */
+.page-title-section {
+  padding: 30px 0 10px;
+}
+
+.page-title {
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.page-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ---------- Layout ---------- */
+.checkout-section {
+  padding: 20px 0 60px;
+}
+
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+/* ---------- Form ---------- */
+.checkout-form-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+}
+
+.form-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--secondary);
+}
+
+.form-section-title i {
+  color: var(--primary);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+/* ---------- Payment Options ---------- */
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.payment-option {
+  cursor: pointer;
+  display: block;
+}
+
+.payment-option input[type="radio"] {
+  display: none;
+}
+
+.payment-option-body {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+  background: #fff;
+}
+
+.payment-option-body i {
+  font-size: 1.4rem;
+  color: var(--primary);
+  width: 36px;
+  text-align: center;
+}
+
+.payment-option-body strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.payment-option-body p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.payment-option input[type="radio"]:checked + .payment-option-body {
+  border-color: var(--primary);
+  background: var(--primary-bg);
+}
+
+.bank-details {
+  margin-top: 16px;
+  padding: 16px;
+  background: var(--bg-hover);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+
+.bank-details p {
+  margin-bottom: 4px;
+  color: var(--text-secondary);
+}
+
+/* ---------- Summary ---------- */
+.checkout-summary {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  position: sticky;
+  top: 90px;
+}
+
+.summary-title {
+  font-size: 1.2rem;
+  margin-bottom: 18px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.summary-items {
+  max-height: 260px;
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+
+.summary-item {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.summary-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.summary-item-info p {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.summary-item-info span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.summary-item-price {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  color: var(--text-secondary);
+}
+
+.summary-row span:last-child {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.discount-row span:last-child {
+  color: var(--success);
+}
+
+.summary-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 16px 0;
+}
+
+.total-row {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.total-row span:last-child {
+  color: var(--primary);
+  font-size: 1.3rem;
+}
+
+#placeOrderBtn {
+  margin-top: 20px;
+}
+
+.checkout-summary .btn-ghost {
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+/* ---------- Success Modal ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal-box {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  padding: 40px 30px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+
+.modal-icon.success {
+  font-size: 4rem;
+  color: var(--success);
+  margin-bottom: 16px;
+}
+
+.modal-box h2 {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  color: var(--secondary);
+}
+
+.modal-order-number {
+  background: var(--primary-bg);
+  color: var(--primary);
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  margin: 12px 0;
+  display: inline-block;
+}
+
+.modal-box p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-summary {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-section {
+    padding: 18px;
+  }
+
+  .payment-option-body {
+    padding: 12px;
+  }
+
+  .payment-option-body i {
+    font-size: 1.1rem;
+    width: 28px;
+  }
+}

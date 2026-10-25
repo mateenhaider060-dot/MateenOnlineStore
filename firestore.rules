@@ -1,0 +1,173 @@
+rules_version = '2';
+
+// ═════════════════════════════════════════════════════════════
+// MATEEN ONLINE STORE — FIRESTORE SECURITY RULES
+// Roles: admin, manager, delivery, customer
+// ═════════════════════════════════════════════════════════════
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ─────────────────────────────────────────
+    // HELPER FUNCTIONS
+    // ─────────────────────────────────────────
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function getUserRole() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && getUserRole() == 'admin';
+    }
+
+    function isManager() {
+      return isSignedIn() && getUserRole() == 'manager';
+    }
+
+    function isDelivery() {
+      return isSignedIn() && getUserRole() == 'delivery';
+    }
+
+    function isStaff() {
+      return isAdmin() || isManager();
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // ═════════════════════════════════════════
+    // USERS
+    // ═════════════════════════════════════════
+    match /users/{userId} {
+      // Read: own profile, staff can read all, delivery can read customers
+      allow read: if isOwner(userId) || isStaff() || isDelivery();
+
+      // Create: only self-registration as 'customer'
+      allow create: if isOwner(userId) &&
+        request.resource.data.role == 'customer';
+
+      // Update: own profile but CANNOT change role
+      allow update: if isOwner(userId) &&
+        request.resource.data.role == resource.data.role;
+
+      // Update: staff can change anything (including roles)
+      allow update: if isStaff();
+
+      // Delete: only admin
+      allow delete: if isAdmin();
+    }
+
+    // ═════════════════════════════════════════
+    // PRODUCTS
+    // ═════════════════════════════════════════
+    match /products/{productId} {
+      allow read: if true;
+      allow create: if isStaff();
+      allow update: if isStaff();
+      allow delete: if isStaff();
+    }
+
+    // ═════════════════════════════════════════
+    // CATEGORIES
+    // ═════════════════════════════════════════
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow create: if isStaff();
+      allow update: if isStaff();
+      allow delete: if isStaff();
+    }
+
+    // ═════════════════════════════════════════
+    // ORDERS
+    // ═════════════════════════════════════════
+    match /orders/{orderId} {
+      // Read: own order, staff, or assigned delivery
+      allow read: if isSignedIn() && (
+        resource.data.userId == request.auth.uid ||
+        isStaff() ||
+        (isDelivery() && (
+          resource.data.deliveryAgentId == request.auth.uid ||
+          resource.data.assignedTo == request.auth.uid
+        ))
+      );
+
+      // Create: user can create own order
+      allow create: if isSignedIn() &&
+        request.resource.data.userId == request.auth.uid;
+
+      // Update: own pending order → cancelled, staff any, delivery assigned
+      allow update: if isSignedIn() && (
+        (resource.data.userId == request.auth.uid &&
+         resource.data.status == 'pending' &&
+         request.resource.data.status == 'cancelled') ||
+        isStaff() ||
+        (isDelivery() && (
+          resource.data.deliveryAgentId == request.auth.uid ||
+          resource.data.assignedTo == request.auth.uid
+        ))
+      );
+
+      // Delete: only admin
+      allow delete: if isAdmin();
+    }
+
+    // ═════════════════════════════════════════
+    // CARTS
+    // ═════════════════════════════════════════
+    match /carts/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    // ═════════════════════════════════════════
+    // COUPONS
+    // ═════════════════════════════════════════
+    match /coupons/{couponId} {
+      allow read: if isSignedIn();
+      allow create: if isStaff();
+      allow update: if isStaff();
+      allow delete: if isStaff();
+    }
+
+    // ═════════════════════════════════════════
+    // REVIEWS
+    // ═════════════════════════════════════════
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if isSignedIn() &&
+        request.resource.data.userId == request.auth.uid;
+      allow update: if isStaff() ||
+        (isSignedIn() && resource.data.userId == request.auth.uid);
+      allow delete: if isStaff() ||
+        (isSignedIn() && resource.data.userId == request.auth.uid);
+    }
+
+    // ═════════════════════════════════════════
+    // SETTINGS
+    // ═════════════════════════════════════════
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ═════════════════════════════════════════
+    // CONTACT MESSAGES
+    // ═════════════════════════════════════════
+    match /messages/{messageId} {
+      allow create: if true;
+      allow read: if isStaff();
+      allow update: if isStaff();
+      allow delete: if isAdmin();
+    }
+
+    // ═════════════════════════════════════════
+    // CATCH-ALL (deny everything else)
+    // ═════════════════════════════════════════
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delivery Panel — Mateen Online Store</title>
+
+  <link rel="icon" href="../assets/favicon.ico" />
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="css/delivery.css" />
+  <link rel="stylesheet" href="../css/responsive.css" />
+</head>
+<body class="delivery-body">
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 🔐 LOGIN SCREEN                          -->
+  <!-- ═══════════════════════════════════════ -->
+  <section id="deliveryLoginScreen" class="delivery-login-screen">
+    <div class="delivery-login-card">
+      <div class="delivery-login-header">
+        <div class="delivery-logo">🚚</div>
+        <h1>Delivery Panel</h1>
+        <p>Mateen Online Store — Rider Access</p>
+      </div>
+
+      <form id="deliveryLoginForm" class="delivery-login-form" autocomplete="off">
+        <div class="form-group">
+          <label for="deliveryEmail">Email</label>
+          <input
+            type="email"
+            id="deliveryEmail"
+            placeholder="rider@mateenstore.com"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="deliveryPassword">Password</label>
+          <input
+            type="password"
+            id="deliveryPassword"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+
+        <button type="submit" id="deliveryLoginBtn" class="btn-primary">
+          <span class="btn-text">Login</span>
+          <span class="btn-loader hidden">⏳</span>
+        </button>
+
+        <p id="deliveryLoginError" class="error-message hidden"></p>
+      </form>
+
+      <div class="delivery-login-footer">
+        <p>🔒 Only authorized delivery staff can access this panel</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 🏠 DELIVERY DASHBOARD                    -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="deliveryDashboard" class="delivery-dashboard hidden">
+
+    <!-- ─── TOPBAR ─── -->
+    <header class="delivery-topbar">
+      <div class="topbar-left">
+        <div class="delivery-brand">
+          <div class="brand-icon">🚚</div>
+          <div>
+            <h1>Delivery Panel</h1>
+            <p>Mateen Online Store</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <button id="deliveryLangToggle" class="lang-btn" title="Language">
+          🌐 <span id="deliveryLangLabel">EN</span>
+        </button>
+
+        <button id="refreshBtn" class="icon-btn" title="Refresh">
+          🔄
+        </button>
+
+        <div class="delivery-profile">
+          <img id="deliveryAvatar" src="../assets/avatar.png" alt="Rider" />
+          <div class="delivery-profile-info">
+            <span id="deliveryName">Rider</span>
+            <small id="deliveryEmailDisplay">rider@mateenstore.com</small>
+          </div>
+        </div>
+
+        <button id="deliveryLogoutBtn" class="logout-icon-btn" title="Logout">
+          🚪
+        </button>
+      </div>
+    </header>
+
+    <!-- ─── STATS CARDS ─── -->
+    <div class="delivery-stats">
+      <div class="delivery-stat-card">
+        <div class="stat-icon-box blue">📦</div>
+        <div class="stat-info">
+          <p data-i18n="delivery_stat_assigned">Assigned</p>
+          <h3 id="statAssigned">0</h3>
+        </div>
+      </div>
+
+      <div class="delivery-stat-card">
+        <div class="stat-icon-box orange">🚴</div>
+        <div class="stat-info">
+          <p data-i18n="delivery_stat_out">Out for Delivery</p>
+          <h3 id="statOut">0</h3>
+        </div>
+      </div>
+
+      <div class="delivery-stat-card">
+        <div class="stat-icon-box green">✅</div>
+        <div class="stat-info">
+          <p data-i18n="delivery_stat_delivered">Delivered Today</p>
+          <h3 id="statDelivered">0</h3>
+        </div>
+      </div>
+
+      <div class="delivery-stat-card">
+        <div class="stat-icon-box red">❌</div>
+        <div class="stat-info">
+          <p data-i18n="delivery_stat_failed">Failed</p>
+          <h3 id="statFailed">0</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── TABS ─── -->
+    <nav class="delivery-tabs">
+      <button class="tab-btn active" data-tab="assigned">
+        📋 <span data-i18n="delivery_tab_assigned">Assigned</span>
+        <span class="tab-count" id="countAssigned">0</span>
+      </button>
+      <button class="tab-btn" data-tab="out">
+        🚴 <span data-i18n="delivery_tab_out">Out for Delivery</span>
+        <span class="tab-count" id="countOut">0</span>
+      </button>
+      <button class="tab-btn" data-tab="delivered">
+        ✅ <span data-i18n="delivery_tab_delivered">Delivered</span>
+        <span class="tab-count" id="countDelivered">0</span>
+      </button>
+      <button class="tab-btn" data-tab="failed">
+        ❌ <span data-i18n="delivery_tab_failed">Failed</span>
+        <span class="tab-count" id="countFailed">0</span>
+      </button>
+    </nav>
+
+    <!-- ─── ORDER LIST ─── -->
+    <div class="delivery-orders-container">
+      <div id="deliveryOrdersList" class="delivery-orders-list">
+        <div class="loading-state">
+          <p data-i18n="loading">Loading...</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 📦 ORDER DETAILS MODAL                   -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="deliveryOrderModal" class="delivery-modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 data-i18n="delivery_order_details">Order Details</h3>
+        <button class="modal-close" data-close="deliveryOrderModal">✖</button>
+      </div>
+
+      <div id="deliveryOrderContent" class="delivery-order-body"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ✅ DELIVERY CONFIRM MODAL                -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="confirmDeliveryModal" class="delivery-modal hidden">
+    <div class="modal-content modal-sm">
+      <div class="modal-header">
+        <h3 data-i18n="delivery_confirm_title">Confirm Delivery</h3>
+        <button class="modal-close" data-close="confirmDeliveryModal">✖</button>
+      </div>
+
+      <div class="confirm-body">
+        <p data-i18n="delivery_confirm_text">
+          Confirm that you've delivered this order?
+        </p>
+
+        <div class="form-group">
+          <label data-i18n="delivery_note">Delivery Note (Optional)</label>
+          <textarea
+            id="deliveryNote"
+            rows="3"
+            placeholder="e.g. Handed to customer, received by family member..."
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="delivery_signature">Received By</label>
+          <input
+            type="text"
+            id="receivedBy"
+            placeholder="Customer name..."
+          />
+        </div>
+
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="btn-secondary"
+            data-close="confirmDeliveryModal"
+            data-i18n="cancel"
+          >Cancel</button>
+          <button
+            type="button"
+            class="btn-primary"
+            id="confirmDeliveryBtn"
+            data-i18n="delivery_confirm_btn"
+          >Confirm Delivered</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- ❌ FAILED DELIVERY MODAL                 -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="failedDeliveryModal" class="delivery-modal hidden">
+    <div class="modal-content modal-sm">
+      <div class="modal-header">
+        <h3 data-i18n="delivery_failed_title">Delivery Failed</h3>
+        <button class="modal-close" data-close="failedDeliveryModal">✖</button>
+      </div>
+
+      <div class="confirm-body">
+        <div class="form-group">
+          <label data-i18n="delivery_failed_reason">Reason</label>
+          <select id="failedReason" required>
+            <option value="" data-i18n="select_reason">Select a reason</option>
+            <option value="Customer not available" data-i18n="reason_not_available">Customer not available</option>
+            <option value="Wrong address" data-i18n="reason_wrong_address">Wrong address</option>
+            <option value="Customer refused" data-i18n="reason_refused">Customer refused</option>
+            <option value="Phone unreachable" data-i18n="reason_unreachable">Phone unreachable</option>
+            <option value="Other" data-i18n="reason_other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="delivery_note">Note (Optional)</label>
+          <textarea
+            id="failedNote"
+            rows="3"
+            placeholder="Additional details..."
+          ></textarea>
+        </div>
+
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="btn-secondary"
+            data-close="failedDeliveryModal"
+            data-i18n="cancel"
+          >Cancel</button>
+          <button
+            type="button"
+            class="btn-danger"
+            id="confirmFailedBtn"
+            data-i18n="delivery_failed_btn"
+          >Mark as Failed</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 🍞 TOAST CONTAINER                       -->
+  <!-- ═══════════════════════════════════════ -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- ═══════════════════════════════════════ -->
+  <!-- 📜 SCRIPTS                               -->
+  <!-- ═══════════════════════════════════════ -->
+  <script type="module" src="../js/firebase-config.js"></script>
+  <script type="module" src="../js/i18n.js"></script>
+  <script type="module" src="js/delivery.js"></script>
+</body>
+</html>

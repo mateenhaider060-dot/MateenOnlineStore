@@ -1,0 +1,179 @@
+Mateen Online Store ( Web work )
+
+Mateen Online Store/                    ← مین روٹ فولڈر
+│
+├── 📄 firebase.json                    ← Firebase config
+├── 📄 .firebaserc                      ← Project ID
+├── 📄 .firebase/                       ← Deploy cache (نظر انداز کریں)
+├── 📄 .gitignore                       ← Git ignore
+│
+├── 📁 public/                          ← ⭐ Firebase کا ROOT
+│   │
+│   ├── 📄 index.html                   ← 🆕 Entry point (Indux.html سے rename)
+│   ├── 📄 404.html                     ← 🆕 Not found page
+│   ├── 📄 favicon.ico                  ← 🆕 براؤزر آئیکن
+│   ├── 📄 manifest.json                ← 🆕 PWA manifest (اختیاری)
+│   ├── 📄 service-worker.js            ← 🆕 PWA offline support (اختیاری)
+│   │
+│   ├── 📁 assets/                      ← 🆕 تصاویر، آئیکنز، فونٹس
+│   │   ├── 📁 images/
+│   │   │   ├── products/
+│   │   │   ├── banners/
+│   │   │   └── logo.png
+│   │   ├── 📁 icons/
+│   │   └── 📁 fonts/
+│   │
+│   ├── 📁 Pages/                       ← Customer pages (17)
+│   │   ├── welcome.html
+│   │   ├── home.html
+│   │   ├── login.html
+│   │   ├── signup.html
+│   │   ├── products.html
+│   │   ├── product-details.html
+│   │   ├── cart.html
+│   │   ├── checkout.html
+│   │   ├── orders.html
+│   │   ├── tracking.html
+│   │   ├── profile.html
+│   │   ├── about.html
+│   │   ├── contact.html
+│   │   ├── faq.html
+│   │   ├── terms.html
+│   │   ├── privacy.html
+│   │   └── return-policy.html
+│   │
+│   ├── 📁 css/                         ← 🆕 lowercase (Linux/Firebase کے لیے لازمی)
+│   │   ├── global.css
+│   │   ├── welcome.css
+│   │   ├── home.css
+│   │   ├── auth.css
+│   │   ├── products.css
+│   │   ├── product-details.css
+│   │   ├── cart.css
+│   │   ├── checkout.css
+│   │   ├── orders.css
+│   │   ├── tracking.css
+│   │   ├── profile.css
+│   │   ├── responsive.css
+│   │   └── info-pages.css
+│   │
+│   ├── 📁 js/                          ← 🆕 lowercase
+│   │   ├── firebase-config.js
+│   │   ├── global.js
+│   │   ├── i18n.js
+│   │   ├── auth-guard.js
+│   │   ├── auth.js
+│   │   ├── welcome.js
+│   │   ├── home.js
+│   │   ├── products.js
+│   │   ├── product-details.js
+│   │   ├── cart.js
+│   │   ├── checkout.js
+│   │   ├── orders.js
+│   │   ├── tracking.js
+│   │   ├── profile.js
+│   │   └── info-pages.js
+│   │
+│   ├── 📁 lang/                        ← 🆕 lowercase
+│   │   ├── en.json
+│   │   └── ur.json
+│   │
+│   ├── 📁 Admin/                       ← 🆕 اب public/ کے اندر
+│   │   ├── index.html                  ← Admin entry point
+│   │   ├── dashboard.html
+│   │   └── ... (باقی Admin صفحات)
+│   │
+│   ├── 📁 Manager/                     ← 🆕 اب public/ کے اندر
+│   │   ├── index.html                  ← Manager entry point
+│   │   └── ... (باقی Manager صفحات)
+│   │
+│   └── 📁 Delivery/                    ← 🆕 اب public/ کے اندر
+│       ├── index.html                  ← Delivery entry point
+│       └── ... (باقی Delivery صفحات)
+│
+└── 📁 functions/                       ← 🆕 (اختیاری) Cloud Functions
+    └── index.js
+
+
+
+
+
+
+
+<notes> 
+Complete Files
+
+Mateen Online Store/                    ← Main folder (root)
+│
+├── 📄 indux.html                       ✅ (1)
+│
+├── 📁 Pages/                            ← 23 فائلیں (پہلے 11، اب +6)
+│   ├── 📄 welcome.html                 ✅ (2)
+│   ├── 📄 home.html                    ✅ (3)
+│   ├── 📄 login.html                   ✅ (4)
+│   ├── 📄 signup.html                  ✅ (5)
+│   ├── 📄 products.html                ✅ (6)
+│   ├── 📄 product-details.html         ✅ (7)
+│   ├── 📄 cart.html                    ✅ (8)
+│   ├── 📄 checkout.html                ✅ (9)
+│   ├── 📄 orders.html                  ✅ (10)
+│   ├── 📄 tracking.html                ✅ (11)
+│   ├── 📄 profile.html                 ✅ (12)
+│   ├── 📄 about.html                   ✅ (13) 🆕
+│   ├── 📄 contact.html                 ✅ (14) 🆕
+│   ├── 📄 faq.html                     ✅ (15) 🆕
+│   ├── 📄 terms.html                   ✅ (16) 🆕
+│   ├── 📄 privacy.html                 ✅ (17) 🆕
+│   └── 📄 return-policy.html           ✅ (18) 🆕
+│
+├── 📁 Css/                              ← 13 فائلیں (پہلے 12، اب +1)
+│   ├── 📄 global.css                   ✅ (19)
+│   ├── 📄 welcome.css                  ✅ (20)
+│   ├── 📄 home.css                     ✅ (21)
+│   ├── 📄 auth.css                     ✅ (22)
+│   ├── 📄 products.css                 ✅ (23)
+│   ├── 📄 product-details.css          ✅ (24)
+│   ├── 📄 cart.css                     ✅ (25)
+│   ├── 📄 checkout.css                 ✅ (26)
+│   ├── 📄 orders.css                   ✅ (27)
+│   ├── 📄 tracking.css                 ✅ (28)
+│   ├── 📄 profile.css                  ✅ (29)
+│   ├── 📄 responsive.css               ✅ (30)
+│   └── 📄 info-pages.css               ✅ (31) 🆕
+│
+├── 📁 Js/                               ← 15 فائلیں (پہلے 14، اب +1)
+│   ├── 📄 firebase-config.js           ✅ (32)
+│   ├── 📄 global.js                    ✅ (33)
+│   ├── 📄 i18n.js                      ✅ (34)
+│   ├── 📄 auth-guard.js                ✅ (35)
+│   ├── 📄 auth.js                      ✅ (36)
+│   ├── 📄 welcome.js                   ✅ (37)
+│   ├── 📄 home.js                      ✅ (38)
+│   ├── 📄 products.js                  ✅ (39)
+│   ├── 📄 product-details.js           ✅ (40)
+│   ├── 📄 cart.js                      ✅ (41)
+│   ├── 📄 checkout.js                  ✅ (42)
+│   ├── 📄 orders.js                    ✅ (43)
+│   ├── 📄 tracking.js                  ✅ (44)
+│   ├── 📄 profile.js                   ✅ (45)
+│   └── 📄 info-pages.js                ✅ (46) 🆕
+│
+└── 📁 Lang/                             ← 2 فائلیں
+    ├── 📄 en.json                      ✅ (47)
+    └── 📄 ur.json                      ✅ (48)
+
+</notes>
+
+
+
+
+    Field Type Value
+name string Admin
+email string admin@mateenstore.com
+password string Admin@12345
+phone string 03001234567
+role string admin
+createdAt timestamp (current time)
+UID   k75pnSG2jwNtLP6cVpFdvGk0Ku72
+
+

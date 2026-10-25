@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>متین آن لائن اسٹور - داخلہ</title>
+
+  <!-- گلوبل اسٹائل -->
+  <link rel="stylesheet" href="Css/global.css">
+
+  <!-- لوڈر کے لیے مخصوص اسٹائل -->
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+      margin: 0;
+      direction: rtl;
+    }
+
+    .splash {
+      text-align: center;
+      color: #ffffff;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .splash-logo {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 24px;
+      background-color: #ffffff;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      animation: pulse 1.5s ease infinite;
+    }
+
+    .splash-logo-text {
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: #16a34a;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    .splash-title {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .splash-subtitle {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-bottom: 32px;
+    }
+
+    .splash-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      margin: 0 auto;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- داخلہ اسکرین -->
+  <div class="splash">
+    <div class="splash-logo">
+      <span class="splash-logo-text">M</span>
+    </div>
+    <h1 class="splash-title">متین آن لائن اسٹور</h1>
+    <p class="splash-subtitle">آپ کی پسند، ہماری ذمہ داری</p>
+    <div class="splash-spinner"></div>
+  </div>
+
+  <!-- جاوا اسکرپٹ (داخلہ کی منطق) -->
+  <script type="module">
+    import { auth, db } from "./Js/firebase-config.js";
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getLocal, saveLocal } from "./Js/global.js";
+
+    // ------------------------------------------------------------
+    // کم از کم 2 سیکنڈ splash دکھاؤ (خوبصورتی کے لیے)
+    // ------------------------------------------------------------
+    const MIN_SPLASH_TIME = 2000;
+    const startTime = Date.now();
+
+    // ------------------------------------------------------------
+    // داخلہ کی منطق
+    // ------------------------------------------------------------
+    async function decideDestination() {
+      // 1. Firebase load ہونے کا انتظار
+      auth.onAuthStateChanged(async (user) => {
+        let destination = "Pages/welcome.html";
+
+        // 2. کیا نیا صارف ہے؟
+        const hasVisited = getLocal("hasVisited", false);
+
+        if (user) {
+          // لاگ ان صارف — Firebase سے کردار (role) نکالو
+          try {
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            let role = "customer";
+
+            if (userDoc.exists()) {
+              role = userDoc.data().role || "customer";
+            }
+
+            // کردار کے مطابق صفحہ
+            if (role === "admin") {
+              destination = "Admin/admin.html";
+            } else if (role === "manager") {
+              destination = "Manager/manager.html";
+            } else if (role === "delivery") {
+              destination = "Delivery/delivery.html";
+            } else {
+              destination = "Pages/home.html";
+            }
+          } catch (err) {
+            console.error("کردار نکالنے میں مسئلہ:", err);
+            destination = "Pages/home.html";
+          }
+        } else {
+          // لاگ ان نہیں — نیا یا پرانا مہمان؟
+          if (hasVisited) {
+            destination = "Pages/home.html";
+          } else {
+            destination = "Pages/welcome.html";
+            saveLocal("hasVisited", true);
+          }
+        }
+
+        // 3. کم از کم وقت پورا ہونے کا انتظار
+        const elapsed = Date.now() - startTime;
+        const remaining = Math.max(0, MIN_SPLASH_TIME - elapsed);
+
+        setTimeout(() => {
+          window.location.replace(destination);
+        }, remaining);
+      });
+    }
+
+    // شروع کرو
+    decideDestination();
+  </script>
+
+</body>
+</html>

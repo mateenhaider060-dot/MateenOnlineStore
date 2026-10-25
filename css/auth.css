@@ -1,0 +1,342 @@
+/* ============================================================
+   Mateen Online Store - Login / Signup Styles
+   File: Css/auth.css
+   ============================================================ */
+
+.auth-body {
+  background: linear-gradient(180deg, #f0fdf4 0%, #f9fafb 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  position: relative;
+}
+
+/* ============================================================
+   🌐 LANGUAGE TOGGLE BUTTON (Floating)
+   ============================================================ */
+.lang-btn-floating {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 999;
+  background: #ffffff;
+  color: var(--primary-color, #16a34a);
+  border: 1px solid #e0e0e0;
+  border-radius: 30px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: 0.2s;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.lang-btn-floating:hover {
+  background: var(--primary-color, #16a34a);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.lang-btn-floating i {
+  font-size: 14px;
+}
+
+.lang-btn-floating span {
+  font-family: 'Noto Nastaliq Urdu', 'Segoe UI', sans-serif;
+  line-height: 1;
+}
+
+/* ============================================================
+   WRAPPER
+   ============================================================ */
+.auth-wrapper {
+  width: 100%;
+  max-width: 460px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 32px 28px;
+  animation: authFadeIn 0.5s ease;
+}
+
+@keyframes authFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.auth-header {
+  text-align: center;
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.auth-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.5rem;
+  color: #6b7280;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.auth-back:hover {
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+.auth-logo {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 16px;
+  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(22, 163, 74, 0.25);
+}
+
+.auth-logo-text {
+  font-size: 2.25rem;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.auth-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.auth-subtitle {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+/* ============================================================
+   FORM
+   ============================================================ */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper .form-input {
+  padding-right: 48px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+  color: #6b7280;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.password-toggle:hover {
+  background-color: #f3f4f6;
+}
+
+/* ============================================================
+   CHECKBOX + LINKS
+   ============================================================ */
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #4b5563;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.checkbox-label input[type="checkbox"] {
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  accent-color: #16a34a;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.checkbox-label .link {
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.checkbox-label .link:hover {
+  text-decoration: underline;
+}
+
+.forgot-link {
+  font-size: 0.85rem;
+  color: #16a34a;
+  font-weight: 600;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.auth-footer {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.auth-footer .link {
+  color: #16a34a;
+  font-weight: 700;
+}
+
+.auth-footer .link:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 480px) {
+  .auth-wrapper {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  .auth-title {
+    font-size: 1.3rem;
+  }
+
+  .auth-logo {
+    width: 64px;
+    height: 64px;
+  }
+
+  .auth-logo-text {
+    font-size: 2rem;
+  }
+
+  .lang-btn-floating {
+    top: 12px;
+    right: 12px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+/* ============================================================
+   🌐 RTL SUPPORT (اردو کے لیے)
+   ============================================================ */
+
+/* اردو فونٹ */
+body.lang-ur {
+  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Segoe UI', sans-serif;
+}
+
+/* Language button اردو میں بائیں طرف */
+html[dir="rtl"] .lang-btn-floating {
+  right: auto;
+  left: 16px;
+}
+
+html[dir="rtl"] .lang-btn-floating span {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* Back button اردو میں دائیں طرف */
+html[dir="rtl"] .auth-back {
+  left: auto;
+  right: 0;
+  transform: scaleX(-1);
+}
+
+/* Password toggle اردو میں بائیں طرف */
+html[dir="rtl"] .password-wrapper .form-input {
+  padding-right: 12px;
+  padding-left: 48px;
+}
+
+html[dir="rtl"] .password-toggle {
+  right: auto;
+  left: 12px;
+}
+
+/* Checkbox RTL */
+html[dir="rtl"] .checkbox-label {
+  flex-direction: row-reverse;
+}
+
+/* line-height اردو میں بڑھائیں */
+html[dir="rtl"] .auth-title {
+  line-height: 1.8;
+}
+
+html[dir="rtl"] .auth-subtitle,
+html[dir="rtl"] .auth-footer,
+html[dir="rtl"] .checkbox-label,
+html[dir="rtl"] .forgot-link {
+  line-height: 2.1;
+}
+
+/* اردو میں buttons کی اونچائی */
+html[dir="rtl"] .btn {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  font-family: 'Noto Nastaliq Urdu', 'Segoe UI', sans-serif;
+}
+
+/* اردو میں inputs کی اونچائی */
+html[dir="rtl"] .form-input {
+  font-family: 'Noto Nastaliq Urdu', 'Segoe UI', sans-serif;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+/* ============================================================
+   🌐 RTL RESPONSIVE
+   ============================================================ */
+@media (max-width: 480px) {
+  html[dir="rtl"] .lang-btn-floating {
+    right: auto;
+    left: 12px;
+  }
+}
