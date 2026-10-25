@@ -3,50 +3,14 @@
     "public": ".",
     "ignore": [
       "firebase.json",
-      "firestore.rules",
-      "firestore.indexes.json",
       "**/.*",
-      "**/node_modules/**",
-      "**/functions/**",
-      "**/backend/**",
-      "audit.html",
-      "Info.txt",
-      "PROJECT_STATUS.txt",
-      "*.md"
-    ],
-    "headers": [
-      {
-        "source": "**/*.@(js|css)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, max-age=3600"
-          }
-        ]
-      },
-      {
-        "source": "**/*.@(jpg|jpeg|png|gif|webp|svg|ico)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, max-age=86400"
-          }
-        ]
-      },
-      {
-        "source": "**/*.json",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "public, max-age=3600"
-          }
-        ]
-      }
-    ],
-    "cleanUrls": true,
-    "trailingSlash": false
+      "**/node_modules/**"
+    ]
   },
   "firestore": {
-    "rules": "firestore.rules"
+    "database": "(default)",
+    "location": "me-central2",
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
   }
 }

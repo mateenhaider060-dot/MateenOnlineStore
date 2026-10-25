@@ -1,6 +1,6 @@
 // ============================================================
 // Mateen Online Store - Firebase Configuration
-// File: Js/firebase-config.js
+// File: js/firebase-config.js
 // Purpose: Firebase ko initialize karna (Auth + Firestore)
 // ============================================================
 
@@ -10,20 +10,15 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-aut
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 // ------------------------------------------------------------
-// Firebase Project Configuration
-// Project: Mateen Online Store
+// Firebase Project Configuration (NEW PROJECT)
 // ------------------------------------------------------------
 const firebaseConfig = {
-  // Yahan 'f' small hai, 'F' nahi
-  apiKey: "AIzaSyBsNaHTswPcLxGbfN8ohT3yiLh9_WC5YMc", 
-  authDomain: "mateen-online-store.firebaseapp.com",
-  projectId: "mateen-online-store",
-  storageBucket: "mateen-online-store.firebasestorage.app",
-  // Yahan 718 hai, 716 nahi
-  messagingSenderId: "200560536718", 
-  // Yahan bhi 718 hai
-  appId: "1:200560536718:web:5069fa9b39080cda26eddf", 
-  measurementId: "G-BY53CHLS4D"
+  apiKey: "AIzaSyAGTt5Es857_OB5-roAqBQFKYWwCysw6Z8",
+  authDomain: "mateenonlinestore.firebaseapp.com",
+  projectId: "mateenonlinestore",
+  storageBucket: "mateenonlinestore.firebasestorage.app",
+  messagingSenderId: "875027596254",
+  appId: "1:875027596254:web:4b711fb5a922902916134f"
 };
 
 // ------------------------------------------------------------
